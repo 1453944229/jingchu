@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>车源信息发布</title>
+</head>
+
+<body>
+<script src="/static/js/jquery.js" type="text/javascript"></script>
+<script src="/static/js/city.js"></script>
+
+<style>
+    .land_content .header_wrap_box{width:1200px;margin:0 auto;padding-bottom:60px;}
+    .land_content .header_wrap_box .logo{float:left;margin-top:30px;}
+    .land_content .header_wrap_box .ld_header_box{float:right;}
+    .land_content .ld_header_box{margin-top:20px;}
+    .land_content .ld_header_box img{float:left;margin-top:3px;}
+    .land_content .ld_header_box a{float:left;font-size:14px;color:#666;margin-left:5px;}
+
+
+    .land_content .landing_wrap_box{width:1200px;margin:0 auto;background-color:#fff;padding-bottom:40px;}
+    .land_content .landing_wrap_box h1{font-size:22px;color:#333;margin:40px 250px;}
+    .land_content .landing_box input{display:block;font-size:14px;color:#999;width:320px;padding:10px 0 10px 10px;border:solid #ccc 1px;border-radius:2px;margin-bottom:20px;}
+    .land_content .landing_wrap_box .mima{display: inline-block;margin-right:40px;}
+    .land_content .landing_wrap_box .ts{color:#999;font-size:14px;}
+    .land_content .landing_wrap_box .remark_warm{right: -80px;top:0; display: block;height: 38px;line-height: 38px;}
+    .land_content .landing_wrap_box .input_t{width:150px;height:38px;line-height:38px;display:block;float:left;text-align:right;color:#1b69bb;font-size:16px;font-weight:600;}
+    .land_content .landing_wrap_box select{display:block;font-size:14px;color:#666;width:330px;padding:10px 0 10px 10px;border:solid #ccc 1px;border-radius:2px;margin-bottom:20px;}
+    .land_content .landing_box .yh01{background:url(../img/landing/02.png) no-repeat 236px;}
+    .land_content .landing_box .yh02{margin:0 0 40px 150px;border:none;border-radius:40px;background-color:#F44133;color:#fff;font-size:20px;text-align:center;}
+    .land_content .landing_box .yh02:hover{
+        cursor:pointer;
+        background:#4677ac;
+    }
+    .land_content .landing_box{float:left;margin:0 0 0 335px;}
+    .land_content .tishi{float:right;margin:40px 40px 0 0;font-size:14px;color:#999;}
+    .land_content .tishi a{color:#2266b1;}
+    .land_content .tiaokuan {font-size:12px;color:#2266b1;margin-top:8px;}
+    .tiaokuan a{
+        font-size: 13px;
+        vertical-align: middle;
+        color: #2266b1;
+        font-weight:bold;
+    }
+    .land_content .tiaokuan .tk{display: inline-block;vertical-align: middle;margin-bottom:0;width:20px;padding:0;margin-left:150px;}
+    .land_content .re_getcode{width:90px;height:30px;border:0;background:#2266b1;color:#fff;left:230px;top:5px;}
+
+    .land_content .footer_wrap_box{width:1200px;margin:0 auto;margin-top:80px;}
+    .land_content .footer_wrap_box h2,.footer_wrap_box h3{font-size:12px;color:#999;text-align: center;margin-bottom:20px;}
+
+</style>
+<style>
+    .tail-button {
+        display: inline;
+        position: absolute;
+        right: -115px;
+        height: 39px;
+        line-height: 39px;
+        top: -3px;
+    }
+
+    .flex-box {
+        display: flex;
+        flex-wrap:nowrap;
+        flex-direction: row;
+    }
+    .i_vcode {
+        display: inline;
+        height:38px;
+        weight:60px;
+
+
+    }
+
+</style>
+
+    <div class='wrap land_content'>
+    <div class="landing_wrap_box flowhid mt30">
+        <form id="f_add" method="post" th:action="@{/vehicle/add}">
+            <div class="landing_box tcenter">
+                <h1>车源信息发布</h1>
+                <!--                <div class="ts">-->
+                <!--                    <span class='input_t'>分公司：</span>-->
+                <!--                    <select name="fgsid" id="fgsid">-->
+
+                <!--                        <option value="00000082">湖北长捷物流有限公司天津分公司</option>-->
+
+                <!--                        <option value="00000001">平台分中心</option>-->
+
+                <!--                    </select>-->
+                <!--                </div>-->
+                    <div>
+                    <div class="ts">
+                        <span class='input_t'>车辆位置：</span>
+                            <select id="province"  name="province" >
+                                <option value="">省</option>
+                            </select>
+                        <span class='input_t'> </span>
+                            <select id="city" name="city">
+                                <option value="">市</option>
+
+                            </select>
+                        <span class='input_t'> </span>
+                            <select id="country" name="district">
+                                <option value="">县</option>
+                            </select>
+
+                    </div>
+
+
+                    <div class="ts">
+                            <span class='input_t'>车牌号：</span>
+                            <input class="mima middle required"  id="carLicense" name="carLicense" placeholder="请输入车牌号" type="text"  >
+                    </div>
+
+                   <div class="ts">
+                       <span class='input_t'>车辆类型：</span>
+                       <select  class="mima middle" id="mobile" name="carType">
+                           <option disabled value="">请选择车辆类型</option>
+                           <option value="0001">  平板</option>
+                           <option value="0002">  高栏</option>
+                           <option value="0003">  厢式</option>
+                           <option value="0004">集装箱</option>
+                           <option value="0001">  拖车</option>
+                           <option value="0002">  自卸</option>
+                           <option value="0003">  冷藏</option>
+                           <option value="0004">  保温</option>
+                           <option value="0001">高低板</option>
+                           <option value="0002">面包车</option>
+                           <option value="0003">棉被车</option>
+                           <option value="0004">爬梯车</option>
+                           <option value="0004">飞翼车</option>
+                      </select>
+                   </div>
+                        <div class="ts">
+                            <span class='input_t'>车辆长度：</span>
+                            <select name="carLength" class="mima middle required" id="carLength">
+                                <option value="2.7">2.7米</option>
+                                <option value="3.8">3.8米</option>
+                                <option value="4.2">4.2米</option>
+                                <option value="5.0">5.0米</option>
+                                <option value="6.2">6.2米</option>
+                                <option value="6.8">6.8米</option>
+                                <option value="7.6">7.6米</option>
+                                <option value="8.2">8.2米</option>
+                                <option value="8.7">8.7米</option>
+                                <option value="9.6">9.6米</option>
+                                <option value="11.7">11.7米</option>
+                                <option value="12.5">12.5米</option>
+                                <option value="13.0">13米</option>
+                                <option value="15.0">15米</option>
+                                <option value="17.5">17.5米</option>
+                            </select>
+                        </div>
+
+                    <div class="ts">
+                        <span class='input_t'>车辆载重：</span>
+                        <span><input class="mima"  id="trainLoad" name="trainLoad" placeholder="请输入车辆载重 " type="text"  >单位：吨</span>
+                    </div>
+
+                    <div class="ts pr">
+                        <span class='input_t'>联系方式：</span>
+                        <span> <input class="mima middle required" id="telnum" name="telnum" placeholder="请输入手机号码" type="text" ></span>
+                    </div>
+
+                    <div class="ts pr">
+                        <span class='input_t'>备注：</span>
+                        <span> <input class="mima middle required" name="content" placeholder="例如：对货源的要求 等" type="text"  >
+                            </span>
+                    </div>
+
+               <!-- <div class="ts pr">
+                    <span class='input_t'>图形验证码：</span>
+                    <span class="flex-box"><input class="mima middle" type="text"id="code" name="code" placeholder="请输入右边图形中的数字" onblur="existsByCode()" >
+                    <img id=num class="i_vcode" th:src="@{/user/code}" onclick=" document.getElementById( 'num' ).src ='/user/code?'+(new Date()).getTime()">
+                    </span>
+                </div>-->
+                <input type="hidden" name="status" value="0">
+
+                <input class="yh02" onclick="doRegister()" type="button" value="发布" >
+            </div>
+            </div>
+        </form>
+        </div>
+    </div>
+
+
+    <!--        验证输入合法js-->
+    <script th:inline="javascript" type="text/javascript">
+
+       /* function existsByProvince(){
+            var province = $('#province').val();
+            if(province=="" || province == null )
+            {
+                alert("请选择省份!");
+                return;
+            }}
+
+        function existsByCarLicense(){
+            var carLicense = $('#carLicense').val();
+            if(carLicense=="" || carLicense == null || carLicense=="请输入车牌号")
+            {
+                alert("请输入车牌号!");
+                return;
+            }}
+
+       /!* function existsByCode(){
+            var code = $('#code').val();
+            if(code=="" || code == null || code=="请输入图形验证码")
+            {
+                alert("请输入图形验证码!");
+                return;
+            }}*!/
+
+        function existsByTrainLoad(){
+            var trainLoad = $('#trainLoad').val();
+            if(trainLoad=="" || trainLoad == null || trainLoad=="请输入车辆载重")
+            {
+                alert("请输入车辆载重!");
+                return;
+            }}
+
+
+
+        function existsBytelnum(){
+            var telnum =$('#telnum').val();
+            if(telnum=="" || telnum == null || telnum=="请输入手机号码")
+            {
+                alert("请输入手机号码!");
+                return;
+            }
+            var reg = /^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/;
+            var regq = /^(0[1-9][0-9]{1,2}-?)?[1-9][0-9]{6,7}$/;
+            if (!reg.test(telnum) && !regq.test(telnum)) {
+                alert("手机号码有误！");
+                return;
+            }}*/
+
+        function doRegister() {
+
+            var province = $('#province').val();
+            if(province=="" || province == null )
+            {
+                alert("请选择省份!");
+                return false;
+            }
+
+            var carLicense = $('#carLicense').val();
+            if(carLicense == "" || carLicense == null ||carLicense == "请输入车牌号" )
+            {
+                alert("请输入车牌号!");
+                return false;
+            }
+
+            var carLength = $('#carLength').val();
+            if(carLength=="" || carLength == null )
+            {
+                alert("请选择车长!");
+                return false;
+            }
+
+            var trainLoad = $('#trainLoad').val();
+            if(trainLoad=="" || trainLoad == null || trainLoad=="请输入车辆载重")
+            {
+                alert("请输入车辆载重!");
+                return false;
+            }
+
+
+
+            var telnum = $('#telnum').val();
+            if(telnum=="" || telnum == null || telnum=="请输入手机号码")
+            {
+                alert("请输入手机号码!");
+                return false;
+            }
+            var reg = /^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/;
+            var regq = /^(0[1-9][0-9]{1,2}-?)?[1-9][0-9]{6,7}$/;
+            if (!reg.test(telnum) && !regq.test(telnum)) {
+                alert("手机号码有误！");
+                return false;
+            }
+
+
+
+            $("#f_add").submit();
+
+
+
+
+        }
+
+    </script>
+<!--地址选择器-->
+    <script>
+        var allCity = city.citylist;
+        $.each(allCity,function(i,n){
+            //添加每一个省
+            $("#province").append('<option value="'+ n.p +'">' + n.p + '</option>');
+        });
+        $("#province").change(function(){
+            $("#country").show();
+            //执行后面函数之前清空一下
+            $("#city").html('<option value="">市</option>');
+            $("#country").html('<option value="">县</option>');
+            $.each(allCity,function(i,n){
+                if($("#province").val()==n.p){
+                    $.each(n.c,function(a,b){
+                        //添加每一个市
+                        $("#city").append('<option value="'+ b.n + '">' + b.n + '</option>');
+                    });
+                }
+            });
+        });
+
+        $("#city").change(function(){
+            //执行后面函数之前清空一下
+            $("#country").html('<option value="">县</option>');
+            $.each(allCity,function(i,n){
+                if($("#province").val()==n.p){
+                    $.each(n.c,function(a,b){
+                        if($("#city").val()==b.n){
+                            if(b.a){
+                                $.each(b.a,function(c,d){
+                                    //添加每一个县
+                                    $("#country").append('<option value="'+ d.s + '">' + d.s + '</option>');
+                                })
+                            }
+                           /* else{
+                                $("#country").hide();
+                            }*/
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jingchu.web.dao.GoodsDao">
+
+    <resultMap id="goods" type="Goods">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="weight" property="weight"/>
+        <result column="catagory" property="catagory"/>
+        <result column="pay" property="pay"/>
+        <result column="volume" property="volume"/>
+        <result column="content" property="content"/>
+        <result column="joindate" property="joindate"/>
+        <result column="telnum" property="telnum"/>
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
+        <result column="district" property="district"/>
+        <result column="province1" property="province1"/>
+        <result column="city1" property="city1"/>
+        <result column="district1" property="district1"/>
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <delete id="delete" parameterType="Goods">
+        delete from goods_info where id = #{id}
+    </delete>
+    <select id="findByUsername" resultMap="goods">
+        select * from goods_info where username=#{username}
+    </select>
+
+    <update id="updateGoods" parameterType="goods">
+        update
+            goods_info
+        set
+            username=#{username},weight=#{weight} ,catagory=#{catagory},pay=#{pay},
+            volume=#{volume},content=#{content}, joindate=#{joindate},
+            telnum=#{telnum},province=#{province},city=#{city},district=#{district},
+            province1=#{province1},city1=#{city1},district1=#{district1},status=#{status}
+        where id=#{id}
+    </update>
+
+
+    <insert id="addGoods" parameterType="goods">
+        insert into
+            goods_info
+        (
+            id,username,weight,catagory,
+            pay,volume,content,joindate,
+            telnum,province,city,district,
+            province1,city1,district1,status
+        )
+        values
+            (
+                #{id},#{username},#{weight},#{catagory},
+                #{pay},#{volume},#{content},#{joindate},
+                #{telnum},#{province},#{city},#{district},
+                #{province1},#{city1},#{district1},#{status}
+            )
+    </insert>
+
+    <select id="findByUserId" resultMap="goods">
+        select *
+        from goods_info
+        where userId = #{userId}
+    </select>
+
+    <select id="findAll" resultMap="goods">
+        select * from goods_info order
+        by joindate desc
+    </select>
+
+    <select id="search" resultMap="goods">
+    select * from goods_info
+    <where>
+        <if test="province != null and province != &quot;&quot; and province !=&quot;省&quot;">
+            province=#{province}
+        </if>
+
+        <if test="city != null and city != &quot;&quot; and city != &quot;市&quot;">
+            and city=#{city}
+        </if>
+        <if test="district != null and district != &quot;&quot;and district != &quot;县&quot;">
+            and district=#{district}
+        </if>
+        <if test="province1 != null and province1 != &quot;&quot; and province1 !=&quot;省&quot;">
+            province1=#{province1}
+        </if>
+
+        <if test="city1 != null and city1 != &quot;&quot; and city1 != &quot;市&quot;">
+            and city1=#{city1}
+        </if>
+        <if test="district1 != null and district1 != &quot;&quot;and district1 != &quot;县&quot;">
+            and district1=#{district1}
+        </if>
+        <if test="catagory != null and catagory !=&quot;&quot; ">
+            and catagory =#{catagory}
+        </if>
+        <if test="weight != null and weight != 0.0 ">
+            and weight &gt; #{weight}-10 and weight &lt;= #{weight}
+        </if>
+        <if test="volume != null and volume != 0">
+            and  volume &lt;= #{volume}
+        </if>
+    </where>
+        order by joindate desc
+    </select>
+
+
+</mapper>

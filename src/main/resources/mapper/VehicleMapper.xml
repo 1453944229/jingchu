@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jingchu.web.dao.VehicleDao">
+
+    <resultMap id="vehicle" type="Vehicle">
+        <id column="id" property="id"/>
+        <result column="carLicense" property="carLicense"/>
+        <result column="carLength" property="carLength"/>
+        <result column="trainLoad" property="trainLoad"/>
+        <result column="content" property="content"/>
+        <result column="joindate" property="joindate"/>
+        <result column="telnum" property="telnum"/>
+        <result column="username" property="username"/>
+        <result column="userId" property="userId"/>
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
+        <result column="district" property="district"/>
+        <result column="catagory" property="catagory"/>
+        <result column="status" property="status"/>
+
+    </resultMap>
+
+
+    <delete id="delete" parameterType="Vehicle">
+        delete
+        from vehicle_source_info
+        where id = #{id}
+    </delete>
+
+    <select id="findByUsername" resultMap="vehicle">
+        select *
+        from vehicle_source_info
+        where username = #{username}
+    </select>
+
+    <select id="findByUserId" resultMap="vehicle">
+        select *
+        from vehicle_source_info
+        where userId = #{userId}
+    </select>
+
+    <select id="findAll" resultMap="vehicle">
+        select *
+        from vehicle_source_info
+        order by joindate desc
+    </select>
+
+    <update id="updateVehicle" parameterType="vehicle">
+        update vehicle_source_info
+        set car_license=#{carLicense},
+            carlength=#{length},
+            train_load=#{trainLoad},
+            content=#{content},
+            joinbdate=#{joindate},
+            telnum=#{telnum},
+            username=#{username},
+            where id = #{id}
+    </update>
+
+    <insert id="addVehicle" parameterType="vehicle">
+        insert into vehicle_source_info(id, car_license, carlength, train_load, content, joindate, telnum, username)
+        values (#{id}, #{carLicense}, #{carlength}, #{trainLoad}, #{content}, #{joindate}, #{telnum}, #{username})
+    </insert>
+
+    <select id="search" resultMap="vehicle">
+        select * from vehicle_source_info
+        <where>
+            <if test="province != null  and province !=&quot;省&quot; and province != &quot;&quot;">
+                province=#{province}
+            </if>
+
+            <if test="city != null and city != &quot;&quot; and city != &quot;市&quot; ">
+                and city=#{city}
+            </if>
+
+            <if test="district != null and district!= &quot;&quot; and district!= &quot;县&quot;">
+                and district=#{district}
+            </if>
+
+            <if test="carLength != null and carLength !=0.0 ">
+                and carLength=#{carLength}
+            </if>
+            <if test="catagory!= null and catagory !=&quot;&quot; ">
+                and catagory=#{catagory}
+            </if>
+            <if test="trainLoad != null and trainLoad !=0">
+                and trainLoad &gt; #{trainLoad}-10 and trainLoad &lt;= #{trainLoad}
+            </if>
+
+        </where>
+        order by joindate desc
+
+    </select>
+</mapper>

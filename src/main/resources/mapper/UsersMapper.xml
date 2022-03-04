@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jingchu.web.dao.UserDao">
+    <resultMap id="user" type="User">
+        <!--        column是指查询出来的字段名；property的值是实体类中定义的对象的名-->
+        <id column="userId" property="userId"/>
+        <result column="username" property="username"/>
+        <!--<result column="password" property="password" />-->
+        <result column="sex" property="sex"/>
+        <result column="email" property="email"/>
+        <result column="joinDate" property="joinDate"/>
+        <result column="lastTime" property="lastTime"/>
+        <result column="status" property="status"/>
+        <result column="deleted" property="deleted"/>
+        <result column="telnum" property="telnum"/>
+        <result column="vip" property="vip"/>
+        <result column="balance" property="balance"/>
+    </resultMap>
+
+    <select id="login" resultMap="user">
+        select userId,
+               username,
+               sex,
+               email,
+               joinDate,
+               lastTime,
+               status,
+               deleted,
+               telnum,
+               vip,
+               balance
+        from users
+        where userId = #{userId}
+          and password = #{password}
+    </select>
+
+    <select id="findAll" resultType="User">
+        select *
+        from users
+    </select>
+    <!--    查找所有用户
+        <select id="findAll" resultType="User">
+            select * from users
+        </select>-->
+
+    <!--    <insert id="addUser" parameterType="user">-->
+    <!--        insert into users (userId,username,password,sex,email,joinDate,lastTime)-->
+    <!--        values(#{userId},#{username},#{password},#{sex},#{email},#{joinDate},#{lastTime})-->
+    <!--    </insert>-->
+
+    <!--   <select id="findByUserId" resultMap="user">
+           select userId,username,sex,email,joinDate,lastTime,status,avatar,deleted from users where userId=#{userId}
+       </select>-->
+
+    <select id="save" parameterType="User">
+        insert into users (userId,username, password, sex, email, joinDate, lastTime, telnum, vip, balance)
+        values (#{userId},#{username}, #{password}, #{sex}, #{email}, #{joinDate}, #{lastTime}, #{telnum}, #{vip}, #{balance})
+    </select>
+
+    <select id="findByUserName" resultType="User">
+        select *
+        from users
+        where username = #{username}
+    </select>
+
+    <select id="findByUserId" resultType="User">
+        select *
+        from users
+        where userId = #{userId}
+    </select>
+
+    <select id="findPassword" resultType="int">
+        select count(userId)
+        from users
+        where userId = #{userId}
+          and password = #{password}
+    </select>
+
+
+    <update id="changePassage" parameterType="user">
+        update users
+        set password=#{password}
+        where userId = #{userId}
+    </update>
+    <!--更新用户信息-->
+    <update id="updateUser" parameterType="user">
+        update users
+        set username=#{username},
+            telnum=#{telnum}
+        where userId = #{userId}
+    </update>
+
+    <update id="updateUserTime" parameterType="user">
+        update users
+        set lastTime=#{lastTime}
+        where userId = #{userId}
+    </update>
+
+</mapper>

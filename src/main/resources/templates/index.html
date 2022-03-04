@@ -1,0 +1,1227 @@
+
+<!DOCTYPE html    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="google-site-verification" content="FwR9eu6x7_irUcik3yXK-WxPWqIwznA4mwkVSqGGC4c">
+    <title>荆襄物流园</title>
+    <meta http-equiv="keywords" content="物流,物流信息平台,信息网物流,信息网物流网,信息网物流设备,信息网物流信息网,物流园 ,物流园区,保税物流,绿色物流">
+    <meta name="description"
+          content="荆襄物流园管理平台打造中国领先地方物流信息平台，加速推进物流信息化进程。荆襄物流园管理平台为用户提供覆盖全国范围的物流及相关增值服务，包括在线商机搜索，订单跟踪管理，运价行情查询，物流人生论坛等一系列贴心服务。用户足不出户，在体验信息化物流带来的便捷与安全的同时，还可掌握第一手物流交易信息，轻松开发无限商机！">
+    <link href="/static/css/zhwl.css" rel="stylesheet" type="text/css">
+    <script src="/static/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/static/js/select.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            swfobject.embedSWF("index.swf", "swfContent", "425", "165", "9.0.0", " ");
+
+        })
+        $(function () {
+
+            $("#tabtract").click(function () {
+                $("#tabtract").attr("class", "origin");
+                $("#tabsource").attr("class", "");
+                $("#tabnews").attr("class", "");
+                $("#tractinf").css("display", "");
+                $("#sourceinf").css("display", "none");
+                $("#newsinf").css("display", "none");
+            });
+            $("#tabsource").click(function () {
+                $("#tabtract").attr("class", "");
+                $("#tabsource").attr("class", "origin");
+                $("#tabnews").attr("class", "");
+                $("#sourceinf").css("display", "");
+                $("#tractinf").css("display", "none");
+                $("#newsinf").css("display", "none");
+            });
+            $("#tabnews").click(function () {
+                $("#tabtract").attr("class", "");
+                $("#tabsource").attr("class", "");
+                $("#tabnews").attr("class", "origin");
+                $("#tractinf").css("display", "none");
+                $("#sourceinf").css("display", "none");
+                $("#newsinf").css("display", "");
+
+            });
+
+            $("#tractsearch").click(function () {
+                var s = $("input[id*='txtTrspoint']").val();
+                var f = $("input[id*='txtTrfpoint']").val();
+                 /* //window.location.href = "tractshow.aspx?" + "spoint=" + s + "&fpoint=" + f;*/
+                return false;
+            });
+            $("#sourcesearch").click(function () {
+                var s = $("input[id*='txtSospoint']").val();
+                var f = $("input[id*='txtSofpoint']").val();
+                /*// window.location.href = "goodsshow.aspx?" + "spoint=" + s + "&fpoint=" + f;*/
+                return false;
+            });
+            $("#newssearch").click(function () {
+                //        var  s = $("input[id*='news_lists']").text();
+                var channelIds = $("#news_lists option:selected").val();
+                var k = $("input[id*='txtkeyword']").val();
+                if(channelIds==1){
+                    window.location.href = "/utils/search.html?word=" + k;
+                }else{
+                    window.location.href = "/utils/search.html?channelIds=" +channelIds + "&word=" + k;
+                }
+
+                return false;
+            });
+        });
+    </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav {
+            width: 100%;
+            height: 118px;
+        }
+
+
+
+        .cnt-1 {
+            width: 1100px;
+            height: 380px;
+        }
+
+        .cnt-1-1 {
+            height: 380px;
+            float: left;
+            border: 1px solid #e5e5e5;
+        }
+
+        .cnt-1-1-nav {
+            width: 100%;
+            height: 38px;
+            background: #f7f5f6;
+            border-bottom: 2px solid #0170d9;
+            line-height: 38px;
+            padding: 0 15px 0 15px;
+            box-sizing: border-box;
+        }
+
+        .cnt-1-1-nav span {
+            font-size: 16px;
+            font-weight: bold;
+            color: #0170d9;
+            float: left;
+        }
+
+        .cnt-1-1-nav a {
+            text-decoration: none;
+            font-size: 14px;
+            color: #808080;
+            float: right;
+        }
+
+        .cnt-1-1-cnt {
+            width: 100%;
+            padding: 0 20px 20px 20px;
+            box-sizing: border-box;
+        }
+
+        .cnt-1-1-cnt-2 {
+            width: 100%;
+            overflow: auto;
+            height: 179px;
+        }
+
+        .hui {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .cnt-1-1-cnt li {
+            font-size: 14px;
+            color: #333;
+            border-bottom: 1px dashed #cccccc;
+            margin-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .cnt-1-1-cnt li::before {
+            content: "●";
+            color: #0170d9;
+            font-size: 14px;
+            margin-right: 5px;
+        }
+
+        .cnt-1-1-cnt li span {
+            display: none;
+        }
+
+        .cnt3-cnt li a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .cnt3-cnt li {
+            width: 100%;
+            height: 39px;
+            line-height: 39px;
+            font-size: 14px;
+            color: #333;
+            padding-left: 8px;
+            box-sizing: border-box;
+        }
+
+        .cnt3-cnt li::before {
+            content: "●";
+            color: #0170d9;
+            font-size: 14px;
+            margin-right: 5px;
+        }
+
+        .cnt3-cnt li span {
+            display: none;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .cnt-1-1-cnt-1 {
+            list-style: none;
+            width: 100%;
+            border-bottom: 1px dashed #e5e5e5;
+            height: auto;
+            line-height: 22px;
+            font-size: 12px;
+            color: #333;
+            padding-left: 10px;
+            box-sizing: border-box;
+        }
+
+        .cnt-1-1-cnt-1::before {
+            content: "▶";
+            color: #666;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+
+        .cnt-1-1-imctn {
+            width: 100%;
+            height: 212px;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 15px 0;
+            box-sizing: border-box;
+        }
+
+        .imctnp {
+            margin-bottom: 15px;
+        }
+
+        .cnt-1-1-hycnt {
+            width: 100%;
+            height: 148px;
+            text-align: center;
+        }
+
+        .cnt-1-1-hycnt img {
+            margin-top: 20px;
+        }
+
+        .cnt-img {
+            width: 48%;
+            height: 184px;
+            float: left;
+        }
+
+        .cnt-1-1-imctn-new {
+            width: 48%;
+            height: 184px;
+            float: right;
+        }
+
+        .cnt-1-1-hyfw {
+            width: 100%;
+            height: 78px;
+            border: 1px solid #cfe2f1;
+            margin-top: 15px;
+        }
+
+        .cnt-1-1-foot {
+            font-size: 14px;
+            color: #333333;
+        }
+
+        .cnt-1-1-foot span {
+            color: #808080;
+            float: right;
+        }
+
+        .cnt-1-1-foot ul {}
+
+        .cnt-1-1-foot li {
+            line-height: 24px;
+            margin-top: 3px;
+        }
+
+        .cnt-1-1-foot li::before {
+            content: "●";
+            color: #0170d9;
+            font-size: 14px;
+            margin-right: 5px;
+        }
+
+        .cnt-2 {
+            width: 100%;
+            height: 90px;
+            margin: 20px 0;
+            border: 1px solid #e5e5e5;
+        }
+
+        .cnt-3 {
+            width: 100%;
+            height: 240px;
+        }
+
+        .cnt-4 {
+            width: 100%;
+            height: 80px;
+            margin: 15px 0;
+            overflow: auto;
+        }
+
+        .cnt-4-1 {
+            width: 100px;
+            height: 80px;
+            float: left;
+            text-align: center;
+            line-height: 80px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background: #0170d9;
+        }
+
+        .cnt-4-2 {
+            width: 998px;
+            height: 80px;
+            float: left;
+            background: #e9f3fc;
+            border: 1px solid #c9dceb;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        .cnt3-cnt-li {
+            float: left;
+            margin-right: 15px;
+            font-size: 14px;
+            color: #4679af;
+            cursor: pointer;
+        }
+
+        .cnt3-cnt-li a {
+            font-size: 14px;
+            color: #4679af;
+            cursor: pointer;
+            text-decoration: none;
+
+        }
+
+        .cnt-5 {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .cnt-6 {
+            width: 100%;
+            height: 120px;
+            margin: 15px 0;
+        }
+
+        .cnt-7 {
+            width: 100%;
+            height: 61px;
+            text-align: justify;
+            text-align-last: justify;
+        }
+
+        .foot {
+            width: 100%;
+            height: 144px;
+            background-image: linear-gradient(#f2f2f2, #d0cfcf);
+            margin-top: 20px;
+        }
+
+        .cnt-7-1 {
+            width: 255px;
+            height: 60px;
+            display: inline-block;
+            border: 1px solid #e5e5e5;
+        }
+
+        .imctnp {
+            font-weight: bold;
+            font-size: 18px;
+            color: #31689b;
+        }
+
+        .imctnp1 {
+            font-size: 12px;
+            color: #666;
+            line-height: 24px;
+        }
+
+        .imctnpa {
+            color: #ff0000;
+            text-decoration: none;
+        }
+
+        .cnt-6-cnt {
+            width: 100%;
+            text-align: center;
+            height: 80px;
+            line-height: 80px;
+        }
+
+        .cnt-6-cnt ul {
+            padding: 0;
+            margin: 0;
+        }
+
+        .cnt-6-cnt li {
+            list-style: none;
+            display: inline-block;
+            width: 110px;
+            text-align: center;
+        }
+
+        .cnt-6-cnt li a {
+            font-size: 14px;
+            color: #0170d9;
+            text-decoration: none;
+        }
+
+        .fw-1 {
+            width: 88px;
+            height: 78px;
+            background: #f7f5f6;
+            float: left;
+            text-align: center;
+            padding-top: 18px;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #0170d9;
+            font-weight: bold;
+        }
+
+        .fw-2 {
+            float: left;
+            padding-top: 10px;
+            box-sizing: border-box;
+        }
+
+        .fw-2 a {
+            text-decoration: none;
+            font-size: 14px;
+            color: #004f98;
+        }
+
+        .cnt-1-nav-1 {
+            width: 83px;
+            height: 38px;
+            line-height: 40px;
+            color: #fff;
+            text-align: center;
+            background: #0170d9;
+            display: inline-block;
+        }
+
+        .cnt-1-nav-2 {
+            width: 83px;
+            height: 38px;
+            line-height: 40px;
+            color: #a0a0a0;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .cnt-5-cnt-3 {
+            width: 100%;
+            text-align: center;
+            padding: 20px 10px 10px 10px;
+            box-sizing: border-box;
+        }
+
+        .cnt-5-sel {
+            width: 220px;
+            height: 32px;
+            border: 1px solid #e5e5e5;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 18px;
+            padding-left: 10px;
+            box-sizing: border-box;
+        }
+
+        .cnt-5-int {
+            width: 220px;
+            height: 32px;
+            border: 1px solid #e5e5e5;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 18px;
+            padding-left: 10px;
+            box-sizing: border-box;
+        }
+
+        .cnt-5-btn {
+            width: 220px;
+            height: 36px;
+            border: none;
+            border-radius: 5px;
+            background: #0170d0;
+            font-size: 14px;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 0px;
+            cursor: pointer;
+        }
+
+        .foot-nav {
+            width: 100%;
+            text-align: center;
+            color: #017d09;
+        }
+
+        .foot-nav li {
+            width: 80px;
+            height: 16px;
+            line-height: 16px;
+            margin-top: 20px;
+            color: #0170d9;
+            display: inline-block;
+            text-align: center;
+            border-right: 2px solid #0170d9;
+            cursor: pointer;
+        }
+
+        .foot-nav li a {
+            color: #0170d9;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .foot-cnt {
+            text-align: center;
+            font-size: 12px;
+            color: #4d4d4d;
+            margin-top: 20px;
+        }
+
+        .cnt-5-bl {
+            font-size: 14px !important;
+            color: #ff6600 !important;
+            margin-left: 10px;
+        }
+
+        .Menubox LI {
+            width: 87px;
+            height: 40px;
+            padding: 0;
+            line-height: 40px;
+        }
+
+        .search_kbg input {
+            border: 1px solid #e5e5e5;
+            background: none;
+            width: 220px;
+            height: 32px;
+            line-height: 26px;
+            margin: 0 auto;
+        }
+
+        .sckcnt {
+            border: 1px solid #e5e5e5;
+            background: none;
+            width: 220px;
+            height: 32px;
+            line-height: 26px;
+            margin: 0 auto;
+        }
+
+        .search_kbg {
+            background: none;
+        }
+
+        .origin {
+            background: #0170d9 !important;
+            color: #fff !important;
+        }
+    </style>
+    <style type="text/css" media="screen">
+        #swfContent {
+            visibility: hidden
+        }
+    </style>
+</head>
+
+<body>
+<!-- 头部header -->
+
+<div id="Head">
+    <script type="text/javascript" src="/static/js/select.js"></script>
+    <script src="/static/js/jquery.min.js" type="text/javascript"></script>
+   <!-- 导航栏 选中 激活样式-->
+    <script type="text/javascript">
+        $(function () {
+            var url = window.location.href;
+            if (url.indexOf("index") > 0)
+                $("#cid1").attr("class", "active");
+            else if (url.indexOf("wlzx") > 0)
+                $("#cid2").attr("class", "active");
+            else if (url.indexOf("cyxx") > 0)
+                $("#cid3").attr("class", "active");
+            else if (url.indexOf("hyxx") > 0)
+                $("#cid4").attr("class", "active");
+            else if (url.indexOf("rzqy") > 0)
+                $("#cid5").attr("class", "active");
+        });
+    </script>
+
+    <style>
+        .nav {
+            width: 100%;
+            height: 118px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .nav img {
+            width:400px;
+            height:118px;
+            overflow: hidden;
+        }
+
+        .head-title {
+            width: 100%;
+            height: 40px;
+            background: #0170d9;
+            margin-bottom: 20px;
+        }
+
+        #menu {
+            background: #0170d9 !important;
+        }
+
+        .head-title ul {
+            width: 1100px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .head-title li {
+            float: left;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .head-title li a {
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none !important;
+        }
+
+        .active {
+            background: #f07801;
+        }
+    </style>
+
+    <div class="nav">
+        <img src="/static/images/cnt-2.png">
+    </div>
+
+    <div th:replace="_fragment::top_menu"></div>
+
+</div>
+
+
+
+
+
+
+
+<div class="new-list" style="width: 1100px; height: auto; margin: 0 auto">
+    <div class="cnt-1">
+        <div class="cnt-1-1" style="width: 263px">
+            <div class="cnt-1-1-nav">
+                <span>行政法规</span> <a
+                    href="/channels/117.html">更多&gt;&gt;</a>
+            </div>
+            <div class="cnt-1-1-cnt">
+                <ul>
+
+                    <li>
+                        <a class="hui" target="_blank" title="监管？科技？谁能堵上风控漏洞？" href="/contents/117/5.html">
+                            监管？科技？谁能堵上风控漏洞？
+                        </a>
+                        <span>2019-07-22</span>
+                    </li>
+
+                    <li>
+                        <a class="hui" target="_blank" title="国家发展改革委关于印发《“互联网+”高效物流实施意见》的通知" href="/contents/117/4.html">
+                            国家发展改革委关于印发《“互联网+”高效…
+                        </a>
+                        <span>2017-03-10</span>
+                    </li>
+
+                    <li>
+                        <a class="hui" target="_blank" title="发改委印发《“互联网+”高效物流实施意见》" href="/contents/117/3.html">
+                            发改委印发《“互联网+”高效物流实施意见…
+                        </a>
+                        <span>2017-03-09</span>
+                    </li>
+
+                    <li>
+                        <a class="hui" target="_blank" title="发改委发文力促互联网+物流发展 实现物流信息互联" href="/contents/117/2.html">
+                            发改委发文力促互联网+物流发展 实现物流信…
+                        </a>
+                        <span>2017-03-08</span>
+                    </li>
+
+                    <li>
+                        <a class="hui" target="_blank" title="交通运输部关于推进供给侧结构性改革 促进物流业“降本增效”的若干意见" href="/contents/117/1.html">
+                            交通运输部关于推进供给侧结构性改革 促进…
+                        </a>
+                        <span>2017-03-07</span>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="cnt-1-1" style="width: 540px; margin-left: 15px; border: none">
+            <div class="cnt-1-1-nav">
+                <span>行业动态</span> <a
+                    href="/channels/118.html">更多&gt;&gt;</a>
+            </div>
+            <div class="cnt-1-1-imctn">
+
+                <img src="/static/images/cnt-3-2.png" alt="" class="cnt-img">
+                <div class="cnt-1-1-imctn-new">
+                    <p class="imctnp" style="">
+                        今日起，进入荆州的这些车辆“逢车必检”
+                    </p>
+                    <p class="imctnp1" style="">
+                        近日，荆州省新型冠状病毒肺炎疫情防控工作领导小组办公室印发《荆州市加强冷链运输车辆管理确保进口冷链食品应入尽入集中监管仓工作方案》。
+                        <a class="imctnpa" href="/contents/118/7.html">详情</a>
+                    </p>
+                </div>
+
+            </div>
+            <div class="cnt-1-1-foot">
+                <ul>
+
+                    <li>
+                        <a class="hui" target="_blank" title="注意了！明天起车辆免检范围扩大！荆州将有240万车主受益！" href="/contents/118/121.html">
+                            注意了！明天起车辆免检范围扩大！荆州将有240万车主…
+                        </a>
+                        <span>2020-11-20</span>
+                    </li>
+
+                    <li>
+                        <a class="hui" target="_blank" title="ETC扣费疑问？你想知道的都在这里" href="/contents/118/27.html">
+                            ETC扣费疑问？你想知道的都在这里
+                        </a>
+                        <span>2020-11-19</span>
+                    </li>
+
+                    <li>
+                        <a class="hui" target="_blank" title="荆襄市加快推进老旧营运货 车淘汰实施方案" href="/contents/118/61.html">
+                            荆襄市加快推进老旧营运货 车淘汰实施方案
+                        </a>
+                        <span>2020-09-21</span>
+                    </li>
+
+                    <li>
+                        <a class="hui" target="_blank" title="各位驾驶人 即日起,处理交通违法时请注意!" href="/contents/118/31.html">
+                            各位驾驶人 即日起,处理交通违法时请注意!
+                        </a>
+                        <span>2020-07-10</span>
+                    </li>
+
+                    <li>
+                        <a class="hui" target="_blank" title="减免入驻企业近106万元租金，荆襄物流中心确保物畅其流" href="/contents/118/30.html">
+                            减免入驻企业近106万元租金，荆襄物流中心确保物畅其…
+                        </a>
+                        <span>2020-04-17</span>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="cnt-1-1" style="width: 263px; float: right; border: none">
+            <div class="cnt-1-1-nav">
+                <span>会员登录</span>
+            </div>
+            <div class="cnt-1-1-hycnt"
+                 style="background: url(/static/images/kc.png) no-repeat; background-position: bottom;">
+                <a href="/vehicle">
+                    <img src="/static/images/cy_mess.jpg" width="170" height="35" border="0"></a>
+                <a href="/goods">
+                    <img src="/static/images/hy_mess.jpg" width="170" height="35" border="0"></a>
+                <p th:if="!${session.user}" class="" style="margin-top: 5px;">
+                    普通会员可以免费发布信息，<a href="/user" >去登录</a>
+<!--                    th:text="|${user.getUsername} 你好|"-->
+                </p>
+                <p th:if="${session.user}" style="font-size:16px ;margin-top: 5px" th:text="|${session.user.getUsername} 你好|" class="" >你好</p>
+            </div>
+            <div class="cnt-1-1-hyfw">
+                <div class="fw-1">
+                    <img src="/static/images/vip1.png">
+                    <p>
+                        会员服务</p>
+                </div>
+                <div class="fw-2">
+                    <p>
+                        &nbsp;&nbsp;&nbsp;<a href="#"
+                                             target="_blank">免费发布车、货源信息</a></p>
+                    <p>
+                        &nbsp;&nbsp;&nbsp;<a href="http://track.logink.org/" target="_blank">全程GPS跟踪服务</a>
+                    </p>
+                    <p>
+                        &nbsp;&nbsp;&nbsp;<a href="http://resource.logink.org/trade/web/index.jsp"
+                                             target="_blank">全网找车</a></p>
+                </div>
+            </div>
+            <div class="cnt-1-1-hyfw">
+                <div class="fw-1">
+                    <img src="/static/images/vip2.png">
+                    <p>
+                        招商推广</p>
+                </div>
+                <div class="fw-2">
+                    <p>
+                        &nbsp;&nbsp;&nbsp;<a href="#"
+                                             target="_blank">加盟计划</a></p>
+                    <p>
+                        &nbsp;&nbsp;&nbsp;<a href="#"
+                                             target="_blank">会员推广广告服务</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cnt-2">
+        <img src="/static/images/cnt-2.png">
+    </div>
+    <div class="cnt-3">
+        <div class="cnt-1-1" style="width: 542px; height: 240px; float: left; overflow: hidden;
+                    background: url(/static/images/cnt-3-1.png) no-repeat; background-position: bottom right;">
+            <div class="cnt-1-1-nav">
+                <span>最新加盟</span> <a href="/channels/119.html">更多&gt;&gt;</a>
+            </div>
+            <div class="cnt3-cnt">
+                <ul>
+
+                    <li title="荆襄市南湖区七星李志鹏道路货物运输户">荆襄市南湖区七星李志鹏道路货物运输户</li>
+
+                    <li title="荆襄市五方物流有限公司">荆襄市五方物流有限公司</li>
+
+                    <li title="中铁物流集团荆州物流有限公司荆襄分公司">中铁物流集团荆州物流有限公司荆襄分公司</li>
+
+                    <li title="任华俊">任华俊</li>
+
+                    <li title="王海军">王海军</li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="cnt-1-1" style="width: 542px; height: 240px; float: right; overflow: hidden;
+                    background: url(/static/images/cnt-3-2.png) no-repeat; background-position: bottom right;">
+            <div class="cnt-1-1-nav">
+                <span>推荐企业</span> <a href="/channels/120.html">更多&gt;&gt;</a>
+            </div>
+            <div class="cnt3-cnt">
+                <ul>
+
+                    <li title="荆襄市浙润运输有限公司"><a target="_blank" href="/contents/120/93.html">荆襄市浙润运输有限公司</a></li>
+
+                    <li title="荆襄市嘉途运输有限公司"><a target="_blank" href="/contents/120/92.html">荆襄市嘉途运输有限公司</a></li>
+
+                    <li title="荆襄市鑫友运输有限公司"><a target="_blank" href="/contents/120/91.html">荆襄市鑫友运输有限公司</a></li>
+
+                    <li title="荆襄市丰臣运输有限公司"><a target="_blank" href="/contents/120/90.html">荆襄市丰臣运输有限公司</a></li>
+
+                    <li title="荆襄市瑞嘉货运有限公司"><a target="_blank" href="/contents/120/89.html">荆襄市瑞嘉货运有限公司</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+<!--    <div class="cnt-4">
+        <div class="cnt-4-1">
+            物流专线
+        </div>
+        <div class="cnt-4-2">
+            <ul>
+                <li class="cnt3-cnt-li"><a
+                        href="/goods"
+                        target="_blank">北京</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">上海</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">天津</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">重庆</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">吉林</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">辽宁</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">河北</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">新疆</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">甘肃</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">宁夏</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">山西</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">山东</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">青海</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">西藏</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">四川</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">陕西</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">河南</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">湖北</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">安徽</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">江苏</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">荆州</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">江西</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">湖南</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">贵州</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">云南</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">广西</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">广东</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">福建</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">海南</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">香港</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">澳门</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">台湾</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">内蒙古</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">黑龙江</a></li>
+                <li class="cnt3-cnt-li"><a
+                        href="/wlyxxpt/utils/cyxx.html"
+                        target="_blank">其它</a></li>
+            </ul>
+        </div>
+    </div>-->
+
+    <!--<div class="cnt-5">
+        <div class="cnt-1-1" style="width: 402px; height: 218px">
+            <div class="cnt-1-1-nav">
+                <span>实时车源</span> <a class="cnt-5-bl" style="float: none"
+                                     href="#">
+                车源登记</a><a href="/vihicle">更多&gt;&gt;</a>
+            </div>
+            <div class="cnt-1-1-cnt-2">
+                <ul>
+                    <li class="cnt-1-1-cnt-1"> <span>荆州省-荆襄市-秀洲区<font color="#FF0000">→</font>
+                                        荆州省-湖州市-安吉县9.6米厢式货车[2018-04-21]<a
+                                href="#">详情</a></span>
+                    </li>
+                    <li class="cnt-1-1-cnt-1"> <span>荆州省-荆襄市-秀洲区<font color="#FF0000">→</font>
+                                        荆州省-杭州市-萧山区9.6米厢式货车[2018-04-21]<a
+                                href="#">详情</a></span>
+                    </li>
+                    <li class="cnt-1-1-cnt-1"> <span>荆州省-荆襄市-秀洲区<font color="#FF0000">→</font>
+                                        荆州省-杭州市-萧山区7.6米厢式货车[2018-04-21]<a
+                                href="#">详情</a></span>
+                    </li>
+                    <li class="cnt-1-1-cnt-1"> <span>荆州省-荆襄市-秀洲区<font color="#FF0000">→</font>
+                                        荆州省-杭州市-萧山区7.6米厢式货车[2018-04-08]<a
+                                href="#">详情</a></span>
+                    </li>
+                    <li class="cnt-1-1-cnt-1"> <span>荆州省-荆襄市-秀洲区<font color="#FF0000">→</font>
+                                        荆州省-荆襄市-嘉善县9.6米厢式货车[2018-04-08]<a
+                                href="#">详情</a></span>
+                    </li>
+                    <li class="cnt-1-1-cnt-1"> <span>荆州省-荆襄市-秀洲区<font color="#FF0000">→</font>
+                                        荆州省-荆襄市-嘉善县9.6米厢式货车[2018-04-08]<a
+                                href="#">详情</a></span>
+                    </li>
+                    <li class="cnt-1-1-cnt-1"> <span>江苏省-苏州市-吴江市<font color="#FF0000">→</font>
+                                        荆州省-荆襄市-嘉善县9.6米厢式货车[2018-03-30]<a
+                                href="#">详情</a></span>
+                    </li>
+                    <li class="cnt-1-1-cnt-1"> <span>荆州省-荆襄市-秀洲区<font color="#FF0000">→</font>
+                                        江苏省-苏州市-昆山市7.6米厢式货车[2018-03-30]<a
+                                href="#">详情</a></span>
+                    </li>
+                    <li class="cnt-1-1-cnt-1"> <span>荆州省-荆襄市-秀洲区<font color="#FF0000">→</font>
+                                        上海市-上海市-闵行区9.6米厢式货车[2018-03-30]<a
+                                href="#">详情</a></span>
+                    </li>
+                    <li class="cnt-1-1-cnt-1"> <span>荆州省-荆襄市-秀洲区<font color="#FF0000">→</font>
+                                        江苏省-苏州市-昆山市7.6米厢式货车[2018-03-23]<a
+                                href="#">详情</a></span>
+                    </li>
+                    <li class="cnt-1-1-cnt-1"> <span>荆州省-荆襄市-秀洲区<font color="#FF0000">→</font>
+                                        荆州省-杭州市-萧山区9.6米厢式货车[2018-03-23]<a
+                                href="#">详情</a></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="cnt-1-1" style="width: 402px; height: 218px; margin-left: 10px;">
+            <div class="cnt-1-1-nav">
+                <span>实时货源</span><a class="cnt-5-bl" style="float: none"
+                                    href="#">货源登记</a><a
+                    href="/user/add">更多&gt;&gt;</a>
+            </div>
+            <div class="cnt-1-1-cnt-2">
+                <ul>
+                    <li class="cnt-1-1-cnt-1"><span style="">荆州省-荆襄市-秀洲区<font color="#FF0000">→</font>
+                                        荆州省-湖州市-安吉县铁架9.6米厢式[2018-04-21]<a
+                                href="#">详情</a></span>
+                    </li>
+                    <li class="cnt-1-1-cnt-1"><span style="">荆州省-荆襄市-秀洲区<font color="#FF0000">→</font>
+                                        荆州省-杭州市-萧山区铁架9.6米厢式[2018-04-21]<a
+                                href="#">详情</a></span>
+                    </li>
+                    <li class="cnt-1-1-cnt-1"><span style="">荆州省-荆襄市-秀洲区<font color="#FF0000">→</font>
+                                        荆州省-杭州市-萧山区铁架7.6米厢式货车[2018-04-21]<a
+                                href="#">详情</a></span>
+                    </li>
+                    <li class="cnt-1-1-cnt-1"><span style="">荆州省-荆襄市-秀洲区<font color="#FF0000">→</font>
+                                        荆州省-杭州市-萧山区铁架7.6米厢式货车[2018-04-08]<a
+                                href="#">详情</a></span>
+                    </li>
+                    <li class="cnt-1-1-cnt-1"><span style="">荆州省-荆襄市-秀洲区<font color="#FF0000">→</font>
+                                        荆州省-杭州市-萧山区铁架7.6米厢式货车[2018-04-08]<a
+                                href="#">详情</a></span>
+                    </li>
+                    <li class="cnt-1-1-cnt-1"><span style="">荆州省-荆襄市-秀洲区<font color="#FF0000">→</font>
+                                        荆州省-杭州市-萧山区铁架7.6米厢式货车[2018-04-08]<a
+                                href="#">详情</a></span>
+                    </li>
+                    <li class="cnt-1-1-cnt-1"><span style="">荆州省-荆襄市-秀洲区<font color="#FF0000">→</font>
+                                        荆州省-荆襄市-嘉善县铁架9.6米厢式[2018-04-08]<a
+                                href="#">详情</a></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="cnt-1-1" style="width: 263px; height: 218px; float: right;">
+
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="">
+                <tbody>
+                <tr>
+                    <td width="100%">
+                        <div class="frame2" style="padding: 0;">
+                            <div class="Menubox" style="background: #e9f3fc; width: 100%; line-height: 18px;
+                                        height: 40px">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tbody>
+                                    <tr>
+                                        <td width="100%">
+                                            <ul>
+                                                <li id="tabnews" class="origin">物流资讯 </li>
+                                                <li id="tabtract">车源信息 </li>
+                                                <li id="tabsource">货源信息 </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="news">
+
+                                <div id="newsinf" class="cnt-5-cnt-3" style="">
+                                    <select id="news_lists" class="cnt-5-sel">
+                                        <option  value="1">全部</option>
+
+                                        <option value="117">行政法规</option>
+
+                                        <option value="118">行业动态</option>
+
+                                        <option value="119">最新加盟</option>
+
+                                        <option value="120">推荐企业</option>
+
+                                        <option value="121">行业数据</option>
+
+                                        <option value="122">会展信息</option>
+
+                                        <option value="123">物流学院</option>
+
+                                        <option value="124">国际贸易</option>
+
+                                        <option value="125">国内新闻</option>
+
+                                        <option value="126">国际新闻</option>
+
+                                        <option value="127">热门资讯</option>
+
+                                    </select>
+                                    <input name="txtkeyword" type="text" id="txtkeyword"
+                                           class="cnt-5-int" placeholder="请输入关键字">
+                                    <input id="newssearch" type="button" name="imageField"
+                                           class="cnt-5-btn" value="搜索">
+                                </div>
+
+                                <div id="sourceinf" class="cnt-5-cnt-3" style="display: none">
+                                    <input name="txtSospoint" type="text" id="txtSospoint"
+                                           class="cnt-5-int" placeholder="出发地">
+                                    <input name="txtSofpoint" type="text" id="txtSofpoint"
+                                           class="cnt-5-int" placeholder="目的地">
+                                    <input id="sourcesearch" type="button" name="imagefield"
+                                           class="cnt-5-btn" value="搜索">
+                                </div>
+
+                                <div id="tractinf" class="cnt-5-cnt-3" style="display: none">
+                                    <input name="txtTrspoint" type="text" id="txtTrspoint"
+                                           class="cnt-5-int" placeholder="出发地">
+                                    <input name="txtTrfpoint" type="text" id="txtTrfpoint"
+                                           class="cnt-5-int" placeholder="目的地">
+                                    <input id="tractsearch" type="button" name="imagefield"
+                                           class="cnt-5-btn" value="搜索">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>-->
+
+    <div class="cnt-6">
+        <div class="cnt-1-1" style="width: 1100px; height: 120px">
+            <div class="cnt-1-1-nav">
+                <span>实用工具</span> <a href="http://192.168.4.222:8848/default.aspx">更多&gt;&gt;</a>
+            </div>
+            <div class="cnt-6-cnt">
+                <ul>
+                    <li><a href="http://www.ip138.com/weizhang.htm" target="_blank">车辆违章查询</a></li>
+                    <li><a href="http://www.ip138.com/carlist.htm" target="_blank">车牌号码查询</a></li>
+                    <li><a href="http://www.hao123.com/haoserver/showjicc.htm" target="_blank">手机号码查询</a>
+                    </li>
+                    <li><a href="http://qq.ip138.com/idsearch/" target="_blank">身份证号查询</a></li>
+                    <li><a href="http://weather.china.com.cn/" target="_blank">天气预报查询</a></li>
+                    <li><a href="http://qq.ip138.com/train/" target="_blank">火车时刻查询</a></li>
+                    <li><a href="http:" target="_blank">快递单号查询</a></li>
+                    <li><a href="http://ditu.google.cn/" target="_blank">谷歌地图查询</a></li>
+                    <li><a href="http://www.56zhongguo.com/lc.asp" target="_blank">公路里程查询</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="cnt-7">
+        <div class="cnt-7-1">
+            <a href="http://www.zjwlcg.org/" target="_blank">
+                <img src="./images/cnt-7-1.png"></a>
+        </div>
+        <div class="cnt-7-1">
+            <a href="http://www.jxwlxh.com/" target="_blank">
+                <img src="./images/cnt-7-2.png"></a>
+        </div>
+        <div class="cnt-7-1">
+            <a href="http://www.jxjtj.gov.cn/" target="_blank">
+                <img src="./images/cnt-7-3.png"></a>
+        </div>
+        <div class="cnt-7-1">
+            <a href="http://www.jx96520.com.cn/" target="_blank">
+                <img src="./images/cnt-7-4.png"></a>
+        </div>
+    </div>-->
+</div>
+<!-- 尾部header -->
+
+
+<div class="foot" style="">
+    <div class="foot-nav">
+        <ul>
+            <li><a>关于我们</a></li>
+            <li><a>网站动态</a></li>
+            <li><a>资费标准</a></li>
+            <li><a>网站公告</a></li>
+            <li><a>服务条款</a></li>
+            <li><a>联系我们</a></li>
+            <li><a>网站地图</a></li>
+            <li><a>广告服务</a></li>
+        </ul>
+    </div>
+
+</div>
+
+
+
+
+</body>
+
+
+
+</html>

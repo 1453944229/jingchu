@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>会员登录</title>
+    <script src="/static/js/jquery.js" type="text/javascript"></script>
+  <script type="text/javascript" th:inline="javascript">
+    function doLogin(){
+    var username = $("#userId").val();
+    var password = $("#pwd").val();
+    if(username=="" || username == null || username=="请输入登录账号"){
+    alert("请输入登录账号!");
+    return false;
+    }
+    if(password=="" || password == null || password=="请输入账户密码"){
+    alert("请输入密码!");
+    return false;
+    }
+
+    $("#f_add").submit();
+
+    }
+
+    var loginMsg = [[${LoginMsg}]];
+    if( loginMsg ==null || loginMsg =="" ){
+
+    }
+    else{
+        alert("账号信息输入错误");
+    }
+
+    </script>
+
+
+
+
+        <style>
+            .land_content .header_wrap_box{width:1200px;margin:0 auto;padding-bottom:60px;}
+            .land_content .header_wrap_box .logo{float:left;margin-top:30px;}
+            .land_content .header_wrap_box .ld_header_box{float:right;}
+            .land_content .ld_header_box{margin-top:20px;}
+            .land_content .ld_header_box img{float:left;margin-top:3px;}
+            .land_content .ld_header_box a{float:left;font-size:14px;color:#666;margin-left:5px;}
+
+
+            .land_content .landing_wrap_box{width:1200px;margin:0 auto;background-color:#fff;padding-bottom:40px;}
+            .land_content .landing_wrap_box h1{font-size:22px;color:#333;margin:40px 250px;}
+            .land_content .landing_box input{display:block;font-size:14px;color:#999;width:320px;padding:10px 0 10px 10px;border:solid #ccc 1px;border-radius:2px;margin-bottom:20px;}
+            .land_content .landing_wrap_box .mima{display: inline-block;margin-right:40px;}
+            .land_content .landing_wrap_box .ts{color:#999;font-size:14px;}
+            .land_content .landing_wrap_box .remark_warm{right: -80px;top:0; display: block;height: 38px;line-height: 38px;}
+            .land_content .landing_wrap_box .input_t{width:150px;height:38px;line-height:38px;display:block;float:left;text-align:right;color:#1b69bb;font-size:16px;font-weight:600;}
+            .land_content .landing_wrap_box select{display:block;font-size:14px;color:#666;width:330px;padding:10px 0 10px 10px;border:solid #ccc 1px;border-radius:2px;margin-bottom:20px;}
+            .land_content .landing_box .yh01{background:url(../img/landing/02.png) no-repeat 236px;}
+            .land_content .landing_box .loginBtn{width:150px;height:50px;margin:0 0 0 150px;border:none;border-radius:40px;background-color:red;font-size:20px;text-align:center;}
+            .land_content .landing_box .loginBtn:hover{
+                cursor:pointer;
+                background:#4677ac;
+            }
+            .land_content .landing_box{float:left;margin:0 0 0 335px;}
+            .land_content .tishi{float:right;margin:40px 40px 0 0;font-size:14px;color:#999;}
+            .land_content .tishi a{color:#2266b1;}
+            .land_content .tiaokuan {font-size:12px;color:#2266b1;margin-top:8px;}
+            .tiaokuan a{
+                font-size: 13px;
+                vertical-align: middle;
+                color: #2266b1;
+                font-weight:bold;
+            }
+            .land_content .tiaokuan .tk{display: inline-block;vertical-align: middle;margin-bottom:0;width:20px;padding:0;margin-left:150px;}
+            .land_content .re_getcode{width:90px;height:30px;border:0;background:#2266b1;color:#fff;left:230px;top:5px;}
+
+            .land_content .footer_wrap_box{width:1200px;margin:0 auto;margin-top:80px;}
+            .land_content .footer_wrap_box h2,.footer_wrap_box h3{font-size:12px;color:#999;text-align: center;margin-bottom:20px;}
+            /* .loginBtn {*/
+            /*    width: 100%;*/
+            /*    height: auto;*/
+            /*}*/
+            .loginBtn .input_btn{
+                width: 332px;
+                height: 50px;
+                /*line-height: 50px;*/
+                text-align: center;
+                /*background-color: ;*/
+                border-radius: 6px;
+                font-size: 18px;
+                font-weight: 600;
+                left:150px;
+            }
+
+             .loginBtn .select {
+                width: 332px;
+                margin-top: 10px;
+                left:100px;
+                 font-size:16px;
+
+            }
+            .loginBtn .select .forgetMi{
+                float: left;
+            }
+             .loginBtn .select .register {
+                float: right;
+            }
+        </style>
+
+
+
+
+</head>
+<body>
+<div class='wrap land_content'>
+    <div class="landing_wrap_box flowhid mt30">
+        <form th:action="@{/user/login}" method="POST" id="f_add">
+            <div class="landing_box tcenter">
+                <h1>用户登录</h1>
+                                <div class="ts">
+                                    <span class='input_t' >用户类型： </span>
+                                    <select name="status" id="fgsid">
+
+                                        <option value=""> </option>
+
+                                        <option value="1">货主</option>
+                                        <option value="2">车主</option>
+                                        <option value="3">物流经纪人</option>
+
+
+                                    </select>
+                                </div>
+
+                <div class="ts">
+                    <span class='input_t'>登录账号：</span>
+                    <input class="mima middle required"  type="text" id="userId" name="userId" placeholder="请输入登录账号"  >
+                </div>
+                <div class="ts pr">
+                    <span class='input_t'>登录密码：</span>
+                    <input type="password" class="mima middle required" id="pwd" name="password" placeholder="请输入账户密码">
+                </div>
+
+              <!--  <div class="ts pr">
+                    <span class='input_t'>图形验证码：</span>
+                    <input class="mima middle" type="text"  id="authtCode" name="authtCode" placeholder="请输入右边图形中的数字"  >
+                    <img th:src="@{/user/code}" class="i_vcode" id="codeImage" title="图片看不清？点击重新获取" onclick="javascript:chageCode();" >
+                </div>
+-->
+
+                <div class="loginBtn">
+
+                    <input  class="input_btn" type="button" onclick="doLogin()" value="登  录" >
+
+                    <div class="select">
+                        <a href="#" class="forgetMi"></a>
+                        <a href="/user/reg" class="register">立即注册 ></a>
+                    </div>
+                </div>
+
+
+                </div>
+
+<!--                <div class="ts pr">-->
+<!--                    <span class='input_t'>短信验证码：</span>-->
+<!--                    <input class="mima" type="text" name="registersms" placeholder="请输入短信验证码" class='middle required' >-->
+<!--                    <a href="javascript:void(0);" class="btn_default tail-button btn_vercode">获取短信验证码</a>-->
+<!--                </div>-->
+
+        </form>
+
+
+        <div class="clearfix"></div>
+    </div>
+    <div class="footer_wrap_box">
+    </div>
+</div>
+
+
+
+
+
+
+
+</body>
+</html>

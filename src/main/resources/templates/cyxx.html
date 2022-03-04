@@ -1,0 +1,601 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+
+
+<head th:replace="_fragment::head(~{::title})">
+        <title>车源信息</title>
+</head>
+
+
+
+
+
+
+<body>
+<!-- 头部header -->
+
+<div id="Head">
+
+    <script type="text/javascript">
+        $(function () {
+            var url = window.location.href;
+            if (url.indexOf("index") > 0)
+                $("#cid1").attr("class", "active");
+            else if (url.indexOf("wlzx") > 0)
+                $("#cid2").attr("class", "active");
+            else if (url.indexOf("cyxx") > 0)
+                $("#cid3").attr("class", "active");
+            else if (url.indexOf("hyxx") > 0)
+                $("#cid4").attr("class", "active");
+        });
+    </script>
+    <style>
+        .nav {
+            width: 100%;
+            height: 118px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .nav img {
+            width: 1440px;
+        }
+
+        .head-title {
+            width: 100%;
+            height: 40px;
+            background: #0170d9;
+            margin-bottom: 20px;
+        }
+
+        #menu {
+            background: #0170d9 !important;
+        }
+
+        .head-title ul {
+            width: 1100px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .head-title li {
+            float: left;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .head-title li a {
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none !important;
+        }
+
+        .active {
+            background: #f07801;
+        }
+    </style>
+</div>
+    <div class="nav" >
+        <img src="/static/images/cnt-2.png">
+    </div>
+
+    <div th:replace="_fragment::top_menu"></div>
+
+</div>
+
+<!--表格样式-->
+<style>
+    .searchbox ul{
+        width: 100%;
+        height: 30px;
+        display:flex;
+        flex-wrap:nowrap;
+        flex-direction: row;
+        justify-content:right;
+
+    }
+    .searchbox ul li {
+        display:flex;
+        flex-wrap:nowrap;
+        margin-left:20px;
+        align-items:center;
+
+    }
+    .searchbox ul li select{
+        width:80px;
+        height:20px;
+        margin:0 2px;
+        text-align: center;
+
+    }
+    #btn {
+        width:40px;
+        height:20px;
+        font-size:10px;
+        margin-right:50px;
+    }
+    .pagesum {
+        display:flex;
+        flex-wrap:nowrap;
+        flex-direction: row;
+        justify-content:left;
+    }
+    .entry{
+        color:#3399ff !important;
+        margin-right:100px;
+    }
+    .entry a :link{
+        color:#3399ff !important;
+    }
+
+</style>
+
+
+
+<div>
+    <table width="960" align="center" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+        <tr>
+            <td  style="font-size:16px" height="30">
+                &nbsp;<img src="/static/images/gif-0257.gif">&nbsp;您当前位置：首页&nbsp;&gt;&gt;&nbsp;车源信息
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table width="960" border="0" align="center" cellpadding="0" cellspacing="0" class="margin5">
+        <tbody>
+        <tr>
+            <td width="696" valign="top">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="nye_kj_three1"
+                       style="padding-bottom: 20px;">
+                    <tbody>
+                    <tr>
+                        <td valign="top" style="padding-top: 17px;">
+                            <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="padding_seven size14 bold font_yellow padding_top5 ">
+                                            <p align="center" font-size="14px">车源信息</p></div>
+                                        <div class="padding_seven size14 bold entry">
+                                            <p  align="right"  font-size="14px"><a th:href="@{/vehicle}">车源信息发布</a></p>
+                                        </div>
+                                        <form action="/catagory/cyxx" method="post" id="f_add">
+                                        <div class="searchbox"
+                                             style="margin: 0 auto; padding-bottom: 7px; width: 95%">
+                                            <ul>
+                                                <li>
+                                                    <span style="font-size:14px;">车辆长度：</span>
+                                                    <select name="carLength" >
+
+                                                           <option value=""></option>
+                                                        <option value="4.2">4.2米</option>
+                                                        <option value="6.8">6.8米</option>
+                                                        <option value="7.6">7.6米</option>
+                                                        <option value="9.6">9.6米</option>
+                                                        <option value="13.0">13米</option>
+                                                        <option value="17.5">17.5米</option>
+
+                                                    </select>
+                                                </li>
+                                                <li>
+                                                    <span style="font-size:14px;">车辆载重：</span>
+                                                    <select name="trainLoad" >
+<!--                                                        th:value="${session.trainLoad}"-->
+                                                        <option th:text="${session.trainLoad}=='0'?'':( ${session.trainLoad}-10+'~'+${session.trainLoad}+'吨' )"  th:value="${session.trainLoad}=='0'?'':${session.trainLoad}" ></option>
+                                                        <option value=""></option>
+                                                        <option value="10">0~10吨</option>
+                                                        <option value="20">10~20吨</option>
+                                                        <option value="30">20~30吨</option>
+                                                        <option value="40">30~40吨</option>
+                                                        <option value="50">40~50吨</option>
+                                                        <option value="60">50~60吨</option>
+
+                                                    </select>
+                                                </li>
+                                                <li>
+                                                    <div>
+                                                        <span style="font-size:14px;">位置</span>
+                                                        <select id="province" name="province">
+<!--                                                           th:text="${session.province}=='省'?'省':${session.province}"-->
+                                                            <option  >省</option>
+                                                        </select>
+                                                        <select id="city" name="city">
+<!--                                                            th:text="${session.province}=='市'?'市':${session.city}" -->
+                                                            <option  >市</option>
+                                                        </select>
+                                                        <select id="country" name="district">
+<!--                                                            th:value="${session.district}"-->
+                                                            <option >县</option>
+                                                        </select>
+                                                    </div>
+                                                </li>
+                                                <li >
+                                                    <input id="btn" type="submit" value="搜索">
+                                                </li>
+
+
+                                            </ul>
+                                        </div></form>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0"
+                                   style="margin-bottom: 8px;">
+                                <tbody>
+                                <tr>
+                                    <td bordercolor="#FFFFFF">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                                               style="margin-top: 15px;
+                                                background: #fff">
+                                            <tbody>
+
+
+                                            </tbody>
+                                        </table>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                                               class="yellow_bg"
+                                               style="text-align: center; line-height: 3px;">
+                                            <tbody>
+                                            <tr>
+                                                <td height="3">
+                                                    &nbsp;
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                                               class="bluele_bg nye_kj_three1"
+                                               style="line-height: 36px; color: #006699; font-weight: bold; margin-bottom: 2px;"
+                                               align="center">
+                                            <tbody>
+                                            <tr>
+                                                <td width="20%" height="33" align="center">
+                                                    车辆位置
+                                                </td>
+                                                <td width="10%"  align="center">
+                                                    车牌号
+                                                </td>
+                                                <td width="10%" align="center">
+                                                    车长
+                                                </td>
+
+                                                <td width="10%" align="center">
+                                                    车辆载重
+                                                </td>
+
+                                                <td width="20%" align="center">
+                                                    发布时间
+                                                </td>
+
+                                                <td width="20%" align="center">
+                                                    备注
+                                                </td>
+
+                                                <td width="10%" align="center">
+                                                    联系方式
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="citytract">
+                                            <table width="100%" border="0" cellspacing="0"
+                                                   cellpadding="0" style="text-align: center;"
+                                                   class="size14">
+                                                <table>
+
+
+                                                <tr class="gaoji_list1" th:each="vehicle,stat:${pageInfo.list}" th:classappend="${stat.odd}?'bg_dq'">
+                                                    <td width="20%" align="center" class="padding_17">
+                                                        <p><span style="font-size:12px" th:text="${vehicle.province}"></span>
+                                                            <span style="font-size:12px" th:text="${vehicle.city}"></span>
+                                                            <span style="font-size:12px" th:text="${vehicle.district}"></span>
+                                                        </p>
+                                                    </td>
+
+                                                    <td width="10%" align="center">
+                                                        <p style="font-size:12px;color:#666666" th:text="${vehicle.carLicense}">
+                                                            鄂A88888
+                                                        </p>
+
+                                                    </td>
+
+                                                    <td width="10%" align="center">
+                                                        <p th:text="${vehicle.carLength}">综合321</p>
+                                                    </td>
+
+                                                    <td width="10%" align="center">
+                                                        <p th:text="${vehicle.trainLoad}">综合321</p>
+                                                    </td>
+
+                                                    <td width="20%" align="center" >
+                                                        <p th:text="${#temporals.format(vehicle.joindate,'yyyy-MM-dd HH:mm')}">321</p>
+                                                    </td>
+
+                                                    <td  width="20%" align="center">
+                                                        <p th:text="${vehicle.content}">综合321</p>
+                                                    </td>
+
+                                                    <td  width="10%" align="center">
+                                                        <p th:text="${vehicle.telnum}">综合321</p>
+                                                    </td>
+
+                                                    <td width="181px" align="center">
+
+                                                    </td>
+                                                </tr>
+                                                </table>
+                                            </table>
+                                            </div>
+
+                                        <div class="pages">
+                                            <div class="pagesum">
+                                            <div class="inline"><span>当前</span> <span th:text="${pageInfo.pageNum}">1</span>  <span>页</span></div>
+                                            <div class="inline"><span>总</span><span th:text="${pageInfo.pages}">1</span>  <span>页</span></div>
+                                            <div class="inline"><span>共</span><span th:text="${pageInfo.total}">1</span> <span>条记录</span></div>
+                                            </div>
+
+                                            <div class="pageChange" >
+
+                                                <a  th:href="@{/catagory/cyxx/(province=${session.province},city=${session.city},district=${session.district},carLength=${session.carLength},trainLoad=${session.trainLoad} )}">首页</a>
+                                                <a  th:href="@{/catagory/cyxx/(province=${session.province},city=${session.city},district=${session.district},carLength=${session.carLength},trainLoad=${session.trainLoad},pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
+                                                <a  th:href="@{/catagory/cyxx/(province=${session.province},city=${session.city},district=${session.district},carLength=${session.carLength},trainLoad=${session.trainLoad},pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
+                                                <a th:href="@{/catagory/cyxx/(province=${session.province},city=${session.city},district=${session.district},carLength=${session.carLength},trainLoad=${session.trainLoad},pageNum=${pageInfo.pages})}">尾页</a>
+                                            </div>
+
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!--<style type="text/css">
+                        .container {
+
+                            width: 1400px;
+                            display: flex;
+                            flex-direction: row;
+                            flex-wrap: wrap;
+                            justify-content: center;
+                            align-items: center;
+
+
+                        }
+                        .col-md-6 {
+                            width:600px;
+                        }
+                        .col-md-6 .row {
+                            padding-top:5px;
+                        }
+                        .col-md-6 .row .font{
+
+                        }
+
+                    </style>
+                    <div class="container">
+                        <div class="row " >
+                            <div class="col-md-6" >
+                            <p class="h3" >
+                                湘潭市 - 河南省
+                            </p>
+
+                            <div class="row" >
+
+                                <div class="col-md-4">
+                                    <p class="">
+                                        <span>车型：</span>
+                                        <font>厢式</font>
+                                    </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p class="">
+                                        <span>车长：</span>
+                                        <font>6.8米</font>
+                                    </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p class="">
+                                        <span>价格：</span>
+                                        <font>电询</font>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row" >
+
+                                <div class="col-md-4">
+                                    <p class="">
+                                        <span>用车类型：</span>
+                                        <font>整车物流</font>
+                                    </p>
+                                </div>
+                                <div class="col-md-4">
+
+                                    <p class="">
+                                        <span>重量：</span>
+                                        <font>12吨</font>
+                                    </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p class="">
+                                        <span>装货时间：</span>
+                                        <font>2021-12-08</font>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row" >
+
+                                <div class="col-md-4">
+                                    <p class="">
+                                        <span>联系人：</span>
+                                        <font>钱先生</font>
+                                    </p>
+                                </div>
+                                <div class="col-md-4">
+
+                                    <p class="">
+                                        <span>联系电话：</span>
+                                        <font>139****6157</font>
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <div class="row" >
+                                <div class="col-md-8">
+                                    <p class="">
+                                        <span>车辆要求：</span>
+                                        <font>可配货, 全程高速, 绿通</font>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row" >
+                                <div class="col-md-4 col-md-offset-4">
+                                    <p class="">
+                                        <span>车辆要求：</span>
+                                        <font>可配货, 全程高速, 绿通</font>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+
+
+                    </tbody>
+                </table>
+            </td>
+
+
+<!--地址选择器-->
+            <script type="text/javascript">
+                var allCity = city.citylist;
+                $.each(allCity,function(i,n){
+                    //添加每一个省
+                    $("#province").append('<option value="'+ n.p +'">' + n.p + '</option>');
+                });
+                $("#province").change(function(){
+                    $("#country").show();
+                    //执行后面函数之前清空一下
+                    $("#city").html('<option value="市">市</option>');
+                    $("#country").html('<option value="县">县</option>');
+                    $.each(allCity,function(i,n){
+                        if($("#province").val()==n.p){
+                            $.each(n.c,function(a,b){
+                                //添加每一个市
+                                $("#city").append('<option value="'+ b.n + '">' + b.n + '</option>');
+                            });
+                        }
+                    });
+                });
+
+                $("#city").change(function(){
+                    //执行后面函数之前清空一下
+                    $("#country").html('<option value="县">县</option>');
+                    $.each(allCity,function(i,n){
+                        if($("#province").val()==n.p){
+                            $.each(n.c,function(a,b){
+                                if($("#city").val()==b.n){
+                                    if(b.a){
+                                        $.each(b.a,function(c,d){
+                                            //添加每一个县
+                                            $("#country").append('<option value="'+ d.s + '">' + d.s + '</option>');
+                                        })
+                                    }
+                                    /* else{
+                                         $("#country").hide();
+                                     }*/
+                                }
+                            });
+                        }
+                    });
+                });
+            </script>
+
+                <div style="background: #ebf8ff; margin: 0px; padding: 8px;">
+                    <div style="background: #FFFFFF; border: 1px solid #bfe3ff">
+                        <div id="expo-hot">
+
+                        </div>
+                    </div>
+                </div>
+                <div style="clear: both;">
+                </div>
+                <div style="width: 200px; margin: 0 auto; margin-top: 10px;">
+
+
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- 尾部header -->
+
+
+<div id="Bottom">
+
+    <div id="footerNav" style="background-color: #0170DB; color: #FFFFFF">
+
+            <ul>
+                <li><a href="#" target="_blank">关于我们</a> </li>
+                <li><a href="#" target="_blank">网站动态</a> </li>
+                <li><a href="#" target="_blank">资费标准</a> </li>
+                <li><a href="#" target="_blank">网站公告</a> </li>
+                <li><a href="#" target="_blank">服务条款</a> </li>
+                <li><a href="#" target="_blank">联系我们</a> </li>
+                <li><a href="#" target="_blank">网站地图</a> </li>
+                <li><a href="#" target="_blank">广告服务</a> </li>
+            </ul>
+        </center>
+    </div>
+    <!--网站结尾-->
+    <table width="960" border="0" align="center" cellspacing="0" cellpadding="0" style="margin-top: 5px;">
+        <tbody>
+        <tr>
+<!--            <td align="center">-->
+<!--                Copyright Reserved 2009-2012 荆襄物流园(www.jxwly.com) | <a-->
+<!--                    href="https://beian.miit.gov.cn/" target="_blank">浙ICP备12010004号</a><br>-->
+<!--                服务热线：0573-83988699(呼叫中心)&nbsp;&nbsp;传真：0573-83988699-->
+<!--            </td>-->
+
+        </tr>
+        <tr>
+            <td style=" padding-left:400px">
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var url = window.location.href;
+
+        if (url.indexOf("city=") > 0) {
+            $("#citytract").css("display", "");
+            $("#list").css("display", "none");
+            $("#head").css("display", "none");
+        } else if (url.indexOf("spoint=") > 0) {
+            $("#citytract").css("display", "");
+            $("#list").css("display", "none");
+            $("#head").css("display", "");
+        }
+
+    });
+</script>
+</body>
+</html>

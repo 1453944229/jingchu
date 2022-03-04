@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragment::head(~{::title})">
+    <title>入驻企业登记</title>
+
+</head>
+<body>
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script src="/static/js/city.js"></script>
+
+<style>
+    .land_content .header_wrap_box{width:1200px;margin:0 auto;padding-bottom:60px;}
+    .land_content .header_wrap_box .logo{float:left;margin-top:30px;}
+    .land_content .header_wrap_box .ld_header_box{float:right;}
+    .land_content .ld_header_box{margin-top:20px;}
+    .land_content .ld_header_box img{float:left;margin-top:3px;}
+    .land_content .ld_header_box a{float:left;font-size:14px;color:#666;margin-left:5px;}
+
+
+    .land_content .landing_wrap_box{width:1200px;margin:0 auto;background-color:#fff;padding-bottom:40px;}
+    .land_content .landing_wrap_box h1{font-size:22px;color:#333;margin:40px 250px;}
+    .land_content .landing_box input{display:block;font-size:14px;color:#999;width:320px;padding:10px 0 10px 10px;border:solid #ccc 1px;border-radius:2px;margin-bottom:20px;}
+    .land_content .landing_wrap_box .mima{display: inline-block;margin-right:40px;}
+    .land_content .landing_wrap_box .ts{color:#999;font-size:14px;}
+    .land_content .landing_wrap_box .remark_warm{right: -80px;top:0; display: block;height: 38px;line-height: 38px;}
+    .land_content .landing_wrap_box .input_t{width:150px;height:38px;line-height:38px;display:block;float:left;text-align:right;color:#1b69bb;font-size:16px;font-weight:600;}
+    .land_content .landing_wrap_box select{display:block;font-size:14px;color:#666;width:330px;padding:10px 0 10px 10px;border:solid #ccc 1px;border-radius:2px;margin-bottom:20px;}
+    .land_content .landing_box .yh01{background:url(../img/landing/02.png) no-repeat 236px;}
+    .land_content .landing_box .yh02{margin:0 0 40px 150px;border:none;border-radius:40px;background-color:#F44133;color:#fff;font-size:20px;text-align:center;}
+    .land_content .landing_box .yh02:hover{
+        cursor:pointer;
+        background:#4677ac;
+    }
+    .land_content .landing_box{float:left;margin:0 0 0 335px;}
+    .land_content .tishi{float:right;margin:40px 40px 0 0;font-size:14px;color:#999;}
+    .land_content .tishi a{color:#2266b1;}
+    .land_content .tiaokuan {font-size:12px;color:#2266b1;margin-top:8px;}
+    .tiaokuan a{
+        font-size: 13px;
+        vertical-align: middle;
+        color: #2266b1;
+        font-weight:bold;
+    }
+    .land_content .tiaokuan .tk{display: inline-block;vertical-align: middle;margin-bottom:0;width:20px;padding:0;margin-left:150px;}
+    .land_content .re_getcode{width:90px;height:30px;border:0;background:#2266b1;color:#fff;left:230px;top:5px;}
+
+    .land_content .footer_wrap_box{width:1200px;margin:0 auto;margin-top:80px;}
+    .land_content .footer_wrap_box h2,.footer_wrap_box h3{font-size:12px;color:#999;text-align: center;margin-bottom:20px;}
+
+</style>
+<style>
+    .time{
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: baseline;
+    }
+    #startDate {
+        width:144px;
+    }
+    #endDate {
+        width:144px;
+    }
+ /*   #corLicence{
+        display:none;
+    }*/
+    #corLicence {
+        height:20px;
+        width:200px;
+        border:0;
+    }
+    #file-upload-button {
+
+    }
+
+</style>
+
+<div class='wrap land_content'>
+    <div class="landing_wrap_box flowhid mt30">
+        <form th:action="@{/corporation/doAdd}" method="post" id="f_add" enctype="multipart/form-data">
+            <div class="landing_box tcenter">
+                <h1>入驻企业登记</h1>
+                    <div>
+                        <div class="ts">
+                            <label class='input_t'>企业全称：</label>
+                            <input class="mima middle required"  type="text" id="corpName" name="corpName" placeholder="请输入企业名称"  >
+                        </div>
+                    
+                        <div class="ts">
+                            <label class='input_t'>入驻位置：</label>
+                            <span><input class="mima"  type="text" id="corpPosition" name="corpPosition" placeholder="请输入企业位置 " ></span>
+                        </div>
+                        <div class="ts pr">
+                            <label class='input_t'>员工总数：</label>
+                            <span> <input  class="mima middle required" type="text" id="corEmployeeNum" name="corEmployeeNum" placeholder="入驻员工总数" ></span>
+                        </div>
+                        
+                        <div class="ts pr">
+                            <label class='input_t'>入驻时间段：</label>
+
+                            <div class="time">
+
+                                  <input type="text"  placeholder="请选择入驻起始时间" id="startDate" value="2021-11" name="startDate">
+                                    <span > — </span>
+                                <input type="text"  placeholder="请选择入驻到期时间" id="endDate" value="2021-11" name="endDate">   </div>
+                        </div>
+
+                        <div class="ts pr">
+                            <label class='input_t'>营业执照：</label>
+                            <span> <input  type="file" id="corLicence" name="file" alt="请上传企业营业执照" ></span>
+                        </div>
+
+<!--                        <div>-->
+<!--                            <image id="licenceImg" th:src="${imageUrl}"></image>-->
+<!--                        </div>-->
+                        <input class="yh02" type="button" value="发布" onclick="doRegister()">
+                    </div>
+            </div>
+        </form>    
+    </div>
+</div>
+
+<script src="/static/layui-v2.6.8/layui/layui.js"></script>
+
+<script type="text/javascript">
+    layui.use("laydate",function(){
+        var laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#startDate',
+            type: 'month',
+        });
+        laydate.render({
+            elem:'#endDate',
+            type: 'month',
+        });
+    });
+</script>
+<!--        验证输入合法js-->
+<script type="text/javascript" th:inline="javascript">
+
+    function doRegister() {
+        var corpName = $('#corpName').val();
+        if(corpName=="" || corpName == null || corpName=="请输入企业名称")
+        {
+            alert("请输入企业名称!");
+            return;
+        }
+
+        var corpPosition = $('#corpPosition').val();
+        if(corpPosition=="" || corpPosition == null || corpPosition=="请输入企业位置")
+        {
+            alert("请输入企业位置!");
+            return;
+        }
+
+
+        var corEmployeeNum = $('#corEmployeeNum').val();
+        if(corEmployeeNum=="" || corEmployeeNum == null || corEmployeeNum=="入驻员工总数")
+        {
+            alert("请输入入驻员工总数!");
+            return;
+        }
+
+        // var endDate = $('#endDate').val();
+        // var startDate = $('#startDate').val();
+        // if(startDate=="" || startDate == null || startDate=="2020-02" )
+        // {
+        //     alert("请选择入驻开始日期!");
+        //     return;
+        // }
+        //
+        // if(endDate=="" || endDate == null || endDate=="2020-02" )
+        // {
+        //     alert("请选择入驻结束日期!");
+        //     return;
+        // }
+
+        var corLicence = $('#corLicence').val();
+        if(corLicence=="" || corLicence == null )
+        {
+            alert("请上传营业执照!");
+            return;
+        }
+
+        $("#f_add").submit();
+
+
+
+
+    }
+
+</script>
+<!--地址选择器-->
+<script>
+    var allCity = city.citylist;
+    $.each(allCity,function(i,n){
+        //添加每一个省
+        $("#province").append('<option value="'+ n.p +'">' + n.p + '</option>');
+    });
+    $("#province").change(function(){
+        $("#country").show();
+        //执行后面函数之前清空一下
+        $("#city").html('<option value="市">市</option>');
+        $("#country").html('<option value="县">县</option>');
+        $.each(allCity,function(i,n){
+            if($("#province").val()==n.p){
+                $.each(n.c,function(a,b){
+                    //添加每一个市
+                    $("#city").append('<option value="'+ b.n + '">' + b.n + '</option>');
+                });
+            }
+        });
+    });
+
+    $("#city").change(function(){
+        //执行后面函数之前清空一下
+        $("#country").html('<option value="县">县</option>');
+        $.each(allCity,function(i,n){
+            if($("#province").val()==n.p){
+                $.each(n.c,function(a,b){
+                    if($("#city").val()==b.n){
+                        if(b.a){
+                            $.each(b.a,function(c,d){
+                                //添加每一个县
+                                $("#country").append('<option value="'+ d.s + '">' + d.s + '</option>');
+                            })
+                        }
+                        /* else{
+                             $("#country").hide();
+                         }*/
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

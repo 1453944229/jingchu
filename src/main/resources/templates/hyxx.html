@@ -1,0 +1,446 @@
+
+<!DOCTYPE html    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0040)http://192.168.4.222:8848/goodsshow.aspx -->
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"  xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>货源信息-荆襄物流园</title>
+    <meta name="description"
+          content="货源信息是荆襄物流园管理平台信息平台最重要的栏目之一。为用户提供大型在线交易平台，每日更新数以千条长期交易信息和及时交易信息，与用户分享大量国内外物流商机，并有专业客服人员提供7*24小时在线服务，帮助用户尽快达成在线交易。">
+    <meta http-equiv="keywords" content="货源信息,荆襄物流园管理平台货源,货源发布,荆襄物流园管理平台,物流,货运,报价,资源,货物,供求信息,物流信息平台,物流交易,资讯">
+    <link href="/static/css/zhwl.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script src="/static/js/city.js"></script>
+
+
+</head>
+
+<body>
+<!-- 头部header -->
+
+<div id="Head">
+
+
+    <div class="nav">
+        <img src="/static/images/cnt-2.png">
+    </div>
+
+    <div th:replace="_fragment::top_menu"></div>
+
+</div>
+
+<style>
+    .searchbox ul{
+        width: 80%;
+        height: 30px;
+        display:flex;
+        flex-wrap:nowrap;
+        flex-direction: row;
+        justify-content:right;
+
+    }
+    .selectbox {
+        display:flex;
+        flex-wrap:nowrap;
+        margin-left:20px;
+        align-items:center;
+
+    }
+    .selectbox select{
+        width:80px;
+        height:20px;
+        margin:0 2px;
+        text-align: center;
+
+    }
+    #btn {
+        width:40px;
+        height:20px;
+        font-size:10px;
+    }
+    .pagesum {
+        display:flex;
+        flex-wrap:nowrap;
+        flex-direction: row;
+        justify-content:left;
+    }
+    .entry{
+        color:#3399ff !important;
+        margin-right:100px;
+    }
+    .entry a :link{
+        color:#3399ff !important;
+    }
+</style>
+
+
+
+
+
+<div>
+    <table width="960" align="center" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+        <tr>
+            <td  style="font-size:16px" height="30">
+                &nbsp;<img src="/static/images/gif-0257.gif">&nbsp;您当前位置：首页&nbsp;&gt;&gt;&nbsp;货源信息
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table width="960" border="0" align="center" cellpadding="0" cellspacing="0" class="margin5">
+        <tbody>
+        <tr>
+            <td width="696" valign="top">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="nye_kj_three1">
+                    <tbody>
+                    <tr>
+                        <td valign="top" >
+                            <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="padding_seven size14 bold font_yellow padding_top5 "  >
+                                           &nbsp;<p align="center" font-size="14px">货源信息</p></div>
+                                        <div class="padding_seven size14 entry bold ">
+                                            <p  align="right" color="blue" font-size="14px"><a th:href="@{/goods}">货源信息发布</a></p></div>
+                                        <div class="searchbox" style="margin: 0 auto; width: 95%">
+                                            <form action="/catagory/hyxx" method="post" >
+                                            <ul>
+                                                <li class="selectbox">
+                                                    <span   style="font-size:14px;">货物重量：</span>
+                                                    <select name="weight" >
+                                                        <option th:text="${session.weight}=='0.0'?'':( ${session.weight}-10+'~'+${session.weight}+'吨' )"
+                                                                th:value="${session.weight}=='0.0'?'':${session.weight}" ></option>
+                                                        <option value=""></option>
+                                                        <option value="10">0~10吨</option>
+                                                        <option value="20">10~20吨</option>
+                                                        <option value="30">20~30吨</option>
+                                                        <option value="40">30~40吨</option>
+                                                        <option value="50">40~50吨</option>
+                                                        <option value="60">50~60吨</option>
+
+                                                    </select>
+                                                </li>
+                                                <li class="selectbox" >
+                                                        <span style="font-size:14px;">货物起始位置：</span>
+                                                        <select id="province" name="province">
+                                                            <option >省</option>
+                                                        </select>
+                                                        <select id="city" name="city">
+                                                            <option >市</option>
+                                                        </select>
+                                                        <select id="country" name="district">
+                                                            <option >县</option>
+                                                        </select>
+
+                                                </li>
+                                                <li class="selectbox">
+                                                    <input id="btn" type="submit" value="搜索">
+                                                </li>
+
+
+                                            </ul>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0"
+                                   style="margin-bottom: 8px;">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <table width="100%" border="0" cellspacing="0"
+                                               cellpadding="0" style="margin-top: 15px;
+                                            background: #FFFFCC">
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                        <table width="100%" border="0" cellspacing="0"
+                                               cellpadding="0" class="yellow_bg"
+                                               style="text-align: center; line-height: 3px;">
+                                            <tbody>
+                                            <tr>
+                                                <td height="3">
+                                                    &nbsp;
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <table width="100%" border="0" cellspacing="0"
+                                               cellpadding="0" class="bluele_bg nye_kj_three1"
+                                               style="line-height: 36px; color: #006699; font-weight: bold; margin-bottom: 2px;">
+                                            <tbody>
+                                            <tr>
+                                                <td width="20%" height="33" align="center">
+                                                  货物位置
+                                                </td>
+                                                <td width="10%"  align="center">
+                                                   货物重量
+                                                </td>
+                                                <td width="10%" align="center">
+                                                    预计出价
+                                                </td>
+
+                                                <td width="10%" align="center">
+                                                    联系方式
+                                                </td>
+
+                                                <td width="20%" align="center">
+                                                    发布时间
+                                                </td>
+
+                                                <td width="20%" align="center">
+                                                    备注
+                                                </td>
+
+                                                <td width="10%" align="center">
+                                                    发布人
+                                                </td>
+                                            </tr>
+                                            </tbody>
+
+                                        </table>
+                                        <div id="citytract">
+                                            <table width="100%" border="0" cellspacing="0"
+                                                   cellpadding="0" style="text-align: center;"
+                                                   class="size14">
+                                                <table>
+
+
+                                                <tr class="gaoji_list1" th:each="g,stat:${pageInfo.list}"  th:classappend="${stat.odd}?'bg_dq'">
+                                                    <td width="20%" align="center" class="padding_17">
+                                                        <p><span style="font-size:12px" th:text="${g.province}"></span>
+                                                            <span style="font-size:12px" th:text="${g.city}"></span>
+                                                            <span style="font-size:12px" th:text="${g.district}"></span>
+                                                        </p>
+                                                    </td>
+
+                                                    <td width="10%" align="center">
+                                                        <p style="font-size:12px;color:#666666" th:text="${g.weight}">
+                                                            10
+                                                        </p>
+
+                                                    </td>
+
+                                                    <td width="10%" align="center">
+                                                        <p th:text="${g.pay}">20</p>
+                                                    </td>
+
+                                                    <td width="10%" align="center">
+                                                        <p th:text="${g.telnum}">综合321</p>
+                                                    </td>
+
+                                                    <td width="20%" align="center" >
+                                                        <p th:text="${#temporals.format(g.joindate,'yyyy-MM-dd HH:mm')}">321</p>
+                                                    </td>
+
+                                                    <td  width="20%" align="center">
+                                                        <p th:text="${g.content}">综合321</p>
+                                                    </td>
+
+                                                    <td  width="10%" align="center">
+                                                        <p th:text="${g.username}">综合321</p>
+                                                    </td>
+
+                                                    <td width="181px" align="center">
+
+                                                    </td>
+                                                </tr>
+
+
+
+                                                </table>
+                                                </table>
+
+                                        </div>
+                                        <div class="pages">
+                                            <div class="pagesum">
+                                                <div class="inline"><span>当前</span> <span th:text="${pageInfo.pageNum}">1</span>  <span>页</span></div>
+                                                <div class="inline"><span>总</span><span th:text="${pageInfo.pages}">1</span>  <span>页</span></div>
+                                                <div class="inline"><span>共</span><span th:text="${pageInfo.total}">1</span> <span>条记录</span></div>
+                                            </div>
+                                            <div class="pageChange" >
+
+                                                <a  th:href="@{/catagory/hyxx/(province=${session.province1},city=${session.city1},district=${session.district1},weight=${session.weight} )}">首页</a>
+                                                <a  th:href="@{/catagory/hyxx/(province=${session.province1},city=${session.city1},district=${session.district1},weight=${session.weight},pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
+                                                <a  th:href="@{/catagory/hyxx/(province=${session.province1},city=${session.city1},district=${session.district1},weight=${session.weight},pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
+                                                <a th:href="@{/catagory/hyxx/(province=${session.province1},city=${session.city1},district=${session.district1},weight=${session.weight},pageNum=${pageInfo.pages})}">尾页</a>
+                                            </div>
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+<!--            地址选择器js-->
+            <script>
+                var allCity = city.citylist;
+                $.each(allCity,function(i,n){
+                    //添加每一个省
+                    $("#province").append('<option value="'+ n.p +'">' + n.p + '</option>');
+                });
+                $("#province").change(function(){
+                    $("#country").show();
+                    //执行后面函数之前清空一下
+                    $("#city").html('<option value="市">市</option>');
+                    $("#country").html('<option value="县">县</option>');
+                    $.each(allCity,function(i,n){
+                        if($("#province").val()==n.p){
+                            $.each(n.c,function(a,b){
+                                //添加每一个市
+                                $("#city").append('<option value="'+ b.n + '">' + b.n + '</option>');
+                            });
+                        }
+                    });
+                });
+
+                $("#city").change(function(){
+                    //执行后面函数之前清空一下
+                    $("#country").html('<option value="县">县</option>');
+                    $.each(allCity,function(i,n){
+                        if($("#province").val()==n.p){
+                            $.each(n.c,function(a,b){
+                                if($("#city").val()==b.n){
+                                    if(b.a){
+                                        $.each(b.a,function(c,d){
+                                            //添加每一个县
+                                            $("#country").append('<option value="'+ d.s + '">' + d.s + '</option>');
+                                        })
+                                    }
+                                    /* else{
+                                         $("#country").hide();
+                                     }*/
+                                }
+                            });
+                        }
+                    });
+                });
+            </script>
+
+            <script type="text/javascript" th:inline="javascript">
+               window.onload=function() {
+                    var goodsMsg = [[${goodsErrorMsg}]];
+                    if( goodsMsg ==null || goodsMsg =="" || goodsMsg =="正确"){
+
+                    }
+
+                    else{
+                        alert("车主不能发布货源信息");
+
+                    }
+
+                }
+
+            </script>
+<!--            <td width="264" valign="top" class="padding_seven">-->
+<!--                <div style="background: #ebf8ff">-->
+                   <!-- <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr>
+                            <td width="6%" align="right">
+                                <img src="../static/images/h3_left.gif" width="7" height="25">
+                            </td>
+                            <td width="60%" class="padding_seven font_blue5 bold padding_top5 size14">
+                                热门货源信息
+                            </td>
+                            <td width="34%">
+                                &nbsp;
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="background: #ebf8ff; margin: 0px; padding: 8px;">
+                    <div style="background: #FFFFFF; border: 1px solid #bfe3ff">
+                        <div id="                                                                                                                                                    expo-hot">
+                            <ul style="margin: 0px; padding-left: 0px;">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div style="background: #ebf8ff; margin-top: 10px;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr>
+                            <td width="6%" align="right">
+                                <img src="../static/images/h3_left.gif" width="7" height="25">
+                            </td>
+                            <td width="60%" class="padding_seven font_blue5 bold padding_top5 size14">
+                                货源信息推荐
+                            </td>
+                            <td width="34%">
+                                &nbsp;
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>-->
+                     </table>
+                </div>
+
+
+                <div style="background: #ebf8ff; margin: 0px; padding: 8px;">
+                    <div style="background: #FFFFFF; border: 1px solid #bfe3ff">
+                        <div id="expo-hot">
+                            <ul style="margin: 0px; padding-left: 0px;">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div style="clear: both;">
+                </div>
+                <div style="width: 200px; margin: 0 auto; margin-top: 10px;">
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- 尾部header -->
+
+
+<div id="Bottom">
+
+    <div id="footerNav" style="background-color: #0170DB; color: #FFFFFF">
+        <center>
+            <ul>
+                <li><a href="http://192.168.4.222:8848/default.aspx" target="_blank">关于我们</a> </li>
+                <li><a href="http://192.168.4.222:8848/default.aspx" target="_blank">网站动态</a> </li>
+                <li><a href="http://192.168.4.222:8848/default.aspx" target="_blank">资费标准</a> </li>
+                <li><a href="http://192.168.4.222:8848/default.aspx" target="_blank">网站公告</a> </li>
+                <li><a href="http://192.168.4.222:8848/default.aspx" target="_blank">服务条款</a> </li>
+                <li><a href="http://192.168.4.222:8848/default.aspx" target="_blank">联系我们</a> </li>
+                <li><a href="http://192.168.4.222:8848/default.aspx" target="_blank">网站地图</a> </li>
+                <li><a href="http://192.168.4.222:8848/default.aspx" target="_blank">广告服务</a> </li>
+            </ul>
+        </center>
+    </div>
+    <!--网站结尾-->
+    <table width="960" border="0" align="center" cellspacing="0" cellpadding="0" style="margin-top: 5px;">
+        <tbody>
+
+        <tr>
+            <td style=" padding-left:400px">
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="user/fragment2 :: head(~{::title})">
+    <title>个人信息界面</title>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+
+<!--头部导航-->
+<nav th:replace="user/fragment2 :: left-menu"></nav>
+<!----------------------------------------------------------------------------------------->
+
+<!-- 内容区域 -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h2>
+            个人信息
+        </h2>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- right column -->
+            <div class="col-md-12" >
+                <!-- Horizontal Form -->
+                <div class="box box-info">
+                    <form class="form-horizontal" th:action="@{/user/update}" method="post">
+
+                        <div class="box-body">
+<!--                            <div class="form-group image" align="center">-->
+<!--                                <img style="height: 14%;width: 14%" src="../../static/img/default-head.jpg" class="img-circle" alt="User Image">-->
+<!--                            </div>-->
+                            <!-- forbidden -->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" font-size="14">ID</label>
+                                <div class="col-sm-6 ">
+                                    <input type="text" id="userId" name="userId" class="form-control" th:value="${session.user.userId}" disabled="disabled">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="username" class="col-sm-2 control-label">姓名</label>
+                                <div class="col-sm-6">
+                                    <input type="text" id="username"  name="username" class="form-control" th:value="${session.user.username}" disabled="disabled">
+                                </div>
+                            </div>
+
+                            <!-- select -->
+                          <!--  <div class="form-group">
+                                <label class="col-sm-2 control-label">性别</label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" disabled="disabled">
+                                        <option th:text="${session.user.sex}"></option>
+                                    </select>
+                                </div>
+                            </div>-->
+
+                            <div class="form-group">
+                                <label for="telnum" class="col-sm-2 control-label">电话号码</label>
+                                <div class="col-sm-6">
+                                    <input type="text" id="telnum" name="telnum" class="form-control" th:value="${session.user.telnum}" disabled="disabled">
+                                </div>
+                            </div>
+
+                            <!--<div class="form-group">
+                                <label for="email" class="col-sm-2 control-label">邮箱</label>
+                                <div class="col-sm-6">
+                                    <input type="text" id="email" name="email" class="form-control" th:value="${session.user.email}">
+                                </div>
+                            </div>-->
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">注册时间</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" th:value="${#temporals.format(session.user.joinDate,'yyyy-MM-dd HH:mm')}" disabled="disabled">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">余额</label>
+                                <div class="col-sm-6">
+                                    <!--th:text="${session.user.status}==1?'Online':'Deleted'" th:placeholder="${session.user.status}" -->
+                                    <input type="text" class="form-control" disabled="disabled" value="12000">
+                                </div>
+                            </div>
+                            <!-- forbidden -->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">身份</label>
+                                <div class="col-sm-6">
+                                    <!--th:text="${session.user.status}==1?'Online':'Deleted'" th:placeholder="${session.user.status}" -->
+                                    <input type="text" class="form-control" th:if="${session.user.status}==1" value="货主" disabled="disabled">
+                                    <input type="text" class="form-control" th:if="${session.user.status}==2" value="车主" disabled="disabled">
+                                    <input type="text" class="form-control" th:if="${session.user.status}==3" value="物流经纪人" disabled="disabled">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">上次登录时间</label>
+                                <div class="col-sm-6">
+                                    <!--th:text="${session.user.status}==1?'Online':'Deleted'" th:placeholder="${session.user.status}" -->
+                                    <input type="text" class="form-control" th:value="${#temporals.format(session.user.lastTime,'yyyy-MM-dd HH:mm')}" disabled="disabled">
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+<!--                            <p id="errorMessage" th:text="${updateMsg}" style="color: darkred"></p>-->
+                            <!--<button type="reset" class="btn btn-default" style="margin-left: 1px">重置</button>-->
+                            <button id="submit" class="btn btn-info col-sm-2 col-sm-offset-2" onclick="doSubmit()">提交修改</button>
+                        </div>
+                        <!-- /.box-footer -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function doSubmit() {
+            var username = $('#username').val();
+            var telnum = $('#telnum').val();
+
+            if (username == "" || username == null || username == "请输入用户姓名") {
+                alert("请输入用户姓名!");
+                return;
+            }
+
+            if (telnum == "" || telnum == null || telnum == "请输入手机号码") {
+                alert("请输入手机号码!");
+                return;
+            }
+
+            var reg = /^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/;
+            var regq = /^(0[1-9][0-9]{1,2}-?)?[1-9][0-9]{6,7}$/;
+            if (!reg.test(telnum) && !regq.test(telnum)) {
+                alert("手机号码有误！");
+                return;
+            }
+
+
+
+            $("#submit").submit();}
+    </script>
+</div>
+<!-- 内容区域 /-->
+
+
+
+<!----------------------------------------------------------------------------------------->
+<!--底部footer-->
+<footer th:replace="user/fragment2 :: footer"></footer>
+</body>
+
+
+<script>
+    // 设置激活菜单
+    function setSidebarActive(tagUri) {
+        var liObj = $("#" + tagUri);
+        if (liObj.length > 0) {
+            liObj.parent().parent().addClass("active");
+            liObj.addClass("active");
+        }
+    }
+    $(document).ready(function() {
+        // 激活导航位置
+        setSidebarActive("personal");
+    });
+    //避免空数据
+
+</script>
+
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragment::head(~{::title})">
+    <title>入驻企业</title>
+</head>
+<body>
+<div id="Head">
+    <!-- 导航栏 选中 激活样式-->
+    <script type="text/javascript">
+        $(function () {
+            var url = window.location.href;
+            if (url.indexOf("index") > 0)
+                $("#cid1").attr("class", "active");
+            else if (url.indexOf("wlzx") > 0)
+                $("#cid2").attr("class", "active");
+            else if (url.indexOf("cyxx") > 0)
+                $("#cid3").attr("class", "active");
+            else if (url.indexOf("hyxx") > 0)
+                $("#cid4").attr("class", "active");
+            else if (url.indexOf("rzqy") > 0)
+                $("#cid5").attr("class", "active");
+        });
+    </script>
+
+    <style type="text/css">
+        .nav {
+            width: 100%;
+            height: 118px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .nav img {
+            width:400px;
+            height:118px;
+            overflow: hidden;
+        }
+
+        .head-title {
+            width: 100%;
+            height: 40px;
+            background: #0170d9;
+            margin-bottom: 20px;
+        }
+
+        #menu {
+            background: #0170d9 !important;
+        }
+
+        .head-title ul {
+            width: 1100px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .head-title li {
+            float: left;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .head-title li a {
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none !important;
+        }
+
+        .active {
+            background: #f07801;
+        }
+
+    </style>
+
+    <div class="nav">
+        <img src="/static/images/cnt-2.png">
+    </div>
+
+    <div th:replace="_fragment::top_menu"></div>
+
+
+</div>
+
+<!--表格样式-->
+<style>
+    #btn {
+        width:40px;
+        height:20px;
+        font-size:10px;
+        margin-right:50px;
+    }
+    .pagesum {
+        display:flex;
+        flex-wrap:nowrap;
+        flex-direction: row;
+        justify-content:left;
+    }
+    .entry{
+        color:#3399ff !important;
+        margin-right:100px;
+    }
+    .entry a :link{
+        color:#3399ff !important;
+    }
+
+</style>
+
+
+
+<div>
+
+    <table width="960" border="0" align="center" cellpadding="0" cellspacing="0" class="margin5">
+        <tbody>
+        <tr>
+            <td width="696" valign="top">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="nye_kj_three1"
+                       style="padding-bottom: 20px;">
+                    <tbody>
+                    <tr>
+                        <td valign="top" style="padding-top: 17px;">
+                            <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="padding_seven size14 bold font_yellow padding_top5 ">
+                                            <p align="center" font-size="14px">入驻企业</p></div>
+                                        <div class="entry padding_seven  font_yellow size14 bold ">
+                                            <p align="right"  font-size="14px"><a th:href="@{/corporation/add}">入驻企业登记</a></p></div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0"
+                                   style="margin-bottom: 8px;">
+                                <table width="100%" border="0" cellspacing="0"
+                                       cellpadding="0" class="bluele_bg nye_kj_three1"
+                                       style="line-height: 36px; color: #006699; font-weight: bold; margin-bottom: 2px;">
+                                    <tbody>
+                                    <tr>
+                                        <td width="30%" height="33" align="center">
+                                            企业名称
+                                        </td>
+                                        <td width="30%"  align="center">
+                                            位置
+                                        </td>
+                                        <td width="10%" align="center">
+                                            人数
+                                        </td>
+
+                                        <td width="30%" align="center">
+                                            入驻时间
+                                        </td>
+
+                                    </tr>
+                                    </tbody>
+                                <tbody>
+
+                                        </table>
+                                        <div id="citytract">
+                                            <table width="100%" border="0" cellspacing="0"
+                                                   cellpadding="0" style="text-align: center;"
+                                                   class="size14">
+
+
+                                                    <tr class="gaoji_list1" th:each="company,stat:${pageInfo.list}" th:classappend="${stat.even}?'bg_dq'">
+                                                        <td style="width:30%;" align="center" class="padding_17">
+                                                            <p><a style="font-size:16px;color:blue;" th:href="@{'/corporation/images?path='+${company.corLicence}}" th:text="${company.corpName}"></a>
+                                                            </p>
+                                                        </td>
+
+                                                        <td width="30%" align="center">
+                                                            <p style="font-size:14px;" th:text="${company.corpPosition}">
+                                                                鄂A88888
+                                                            </p>
+                                                        </td>
+
+                                                        <td width="10%" align="center">
+                                                            <p style="font-size:14px;" th:text="${company.corEmployeeNum}">综合321</p>
+                                                        </td>
+
+                                                        <td width="30%" align="center" >
+                                                            <p><span th:text="${#dates.format(company.startDate,'yyyy-MM')}"></span>
+                                                               -<span th:text="${#dates.format(company.endDate,'yyyy-MM')}"></span>
+                                                            </p>
+                                                        </td>
+
+                                                    </tr>
+
+                                            </table>
+                                        </div>
+
+                                        <div class="pages">
+                                            <div class="pagesum">
+                                                <div class="inline"><span>当前</span> <span th:text="${pageInfo.pageNum}">1</span>  <span>页</span></div>
+                                                <div class="inline"><span>总</span><span th:text="${pageInfo.pages}">1</span>  <span>页</span></div>
+                                                <div class="inline"><span>共</span><span th:text="${pageInfo.total}">1</span> <span>条记录</span></div>
+                                            </div>
+
+                                            <div class="pageChange" >
+
+                                                <a  th:href="@{/catagory/rzqy/}">首页</a>
+                                                <a  th:href="@{/catagory/rzqy/(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
+                                                <a  th:href="@{/catagory/rzqy/(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
+                                                <a th:href="@{/catagory/rzqy/(pageNum=${pageInfo.pages})}">尾页</a>
+                                            </div>
+
+
+
+                                        </div>
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+
+
+
+            <div style="background: #ebf8ff; margin: 0px; padding: 8px;">
+                <div style="background: #FFFFFF; border: 1px solid #bfe3ff">
+                    <div id="expo-hot">
+
+                    </div>
+                </div>
+            </div>
+            <div style="clear: both;">
+            </div>
+            <div style="width: 200px; margin: 0 auto; margin-top: 10px;">
+
+
+            </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

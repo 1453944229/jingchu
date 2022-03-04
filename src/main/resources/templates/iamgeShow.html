@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragment::head(~{::title})">
+    <title>企业营业执照</title>
+</head>
+<style>
+    .imageBox{
+        height:400px;
+        width:400px;
+        margin:40px auto;
+    }
+    img{
+        height:600px;
+        width:400px;
+        margin:40px auto;
+    }
+    #hidden {
+        height:1px;
+        width:1px;
+    }
+</style>
+<body>
+<div class="imageBox" >
+    <img th:src="@{${path}}" align="center" alt="营业执照">
+
+<!--    <img id="hidden" src="/static/images/uploads/2021/11/13/47915e7cbdd9498e8e03f5d8c765e6f0.jpg" align="center" alt="营业执照">-->
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jingchu.web.dao.CorporationDao">
+    <resultMap id="count" type="Count">
+        <id column="id" property="id"/>
+        <result column="corpName" property="corpName"/>
+        <result column="corpPosition" property="corpPosition"/>
+        <result column="corEmployeeNum" property="corEmployeeNum"/>
+        <result column="corLicence" property="corLicence"/>
+        <result column="startDate" property="startDate"/>
+        <result column="endDate" property="endDate"/>
+    </resultMap>
+
+    <insert id="addCorporation" parameterType="Corporation">
+        insert into Corporation_info(id,corpName,corpPosition,corEmployeeNum,corLicence,startDate,endDate)
+        values(#{id},#{corpName},#{corpPosition},#{corEmployeeNum},#{corLicence},#{startDate},#{endDate})
+    </insert>
+
+    <select id="findAll" resultType="Corporation">
+        select * from Corporation_info
+    </select>
+
+    <delete id="delete" parameterType="Corporation">
+        delete from Corporation_info where id = #{id}
+    </delete>
+</mapper>

@@ -1,0 +1,115 @@
+body {
+	font-family: 'Lato', sans-serif;
+}
+a {
+	color: #b71a4c;
+}
+.front-indicator {
+	width: 500px;
+	margin: 5px 32px 15px 75px;
+	background-color: #f6f6f6;	
+	color: #adadad;
+	text-align: center;
+	padding: 3px;
+	border-radius: 5px;
+}
+.wrapper {
+	width: 100%;
+	text-align: center;
+}
+.container {
+	margin: 0 auto;
+	width: 500px;
+	text-align: left;
+}
+.booking-details {
+	width:500px;
+	float: left;
+	text-align: left;
+	margin-left:40px;
+	font-size: 16px;
+	position: relative;
+	height: 400px;
+}
+.booking-details h2 {
+	margin: 25px 0 20px 0;
+	font-size: 17px;
+}
+.booking-details h3 {
+	margin: 5px 5px 0 0;
+	font-size: 14px;
+}
+div.seatCharts-cell {
+	color: #182C4E;
+	height: 50px;
+	width: 50px;
+	line-height: 50px;
+	
+}
+div.seatCharts-seat {
+	color: #FFFFFF;
+	cursor: pointer;	
+}
+div.seatCharts-row {
+	height: 35px;
+}
+div.seatCharts-seat.available {
+	background-color:  #3a78c3;
+	border:black 1px;
+	font-size: 12px;
+
+}
+div.seatCharts-seat.available.full{
+	background-color: #FF5722;
+	/*#EEAB4A*/
+	border:black 1px;
+
+}
+div.seatCharts-seat.available.notFull {
+	/* 	background: url(vip.png); */
+	background-color:#5BC0DE;
+	border:black 1px;
+}
+div.seatCharts-seat.available.empty {
+/* 	background: url(vip.png); */
+	background-color:#fff;
+	border:black 1px;
+}
+div.seatCharts-seat.focused {
+	background-color: #76B474;
+}
+div.seatCharts-seat.selected {
+	background-color: #E6CAC4;
+}
+div.seatCharts-seat.unavailable {
+	background-color: #ccc;
+}
+div.seatCharts-container {
+	width: 670px;
+	padding: 20px;
+	float: left;
+}
+div.seatCharts-legend {
+	padding-left: 0px;
+	bottom: 0;
+	display:inline;
+
+}
+ul.seatCharts-legendList {
+	padding-left: 0px;
+}
+span.seatCharts-legendDescription {
+	margin-left: 5px;
+	line-height: 30px;
+}
+.checkout-button {
+	display: block;
+	margin: 10px 0;
+	font-size: 14px;
+}
+#selected-seats {
+	max-height: 400px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	width: 700px;
+}

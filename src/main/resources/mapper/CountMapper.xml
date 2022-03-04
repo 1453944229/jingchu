@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jingchu.web.dao.CountDao">
+    <resultMap id="count" type="Count">
+        <id column="id" property="id"/>
+        <result column="loadnum" property="loadnum"/>
+        <result column="unloadnum" property="unloadnum"/>
+        <result column="localDate" property="localDate"/>
+    </resultMap>
+    <resultMap id="summonth" type="Summonth">
+        <result column="loadnum" property="loadnum"/>
+        <result column="unloadnum" property="unloadnum"/>
+        <result column="localDate" property="localDate"/>
+    </resultMap>
+
+
+    <select id="findByDate" resultMap="summonth">
+        SELECT
+            DATE_FORMAT( a.localdate, '%Y-%m' ) AS localdate,
+            SUM( a.loadnum ) loadnum,
+            SUM( a.unloadnum ) unloadnum
+        FROM
+                ( SELECT * FROM mycount WHERE mycount.localdate &gt;=#{startdate}) as a
+        GROUP BY DATE_FORMAT( a.localdate, '%Y-%m' )
+        ORDER BY localdate ASC
+            /*LIMIT 0, 12*/
+    </select>
+
+
+    <select id="findByLocalDate" resultMap="count">
+        select * from mycount
+        order by localdate desc
+            limit 0,30
+    </select>
+
+    <!--    <update id="updateGoods" parameterType="goods">-->
+    <!--        update goods_info set weight=#{weight} , pay=#{pay} , content=#{content}, username=#{username},-->
+    <!--                              joindate=#{joindate} ,telnum=#{telnum} where id=#{id}-->
+    <!--    </update>-->
+
+    <insert id="addCount" parameterType="Count">
+        insert into mycount(id,loadnum,unloadnum,localDate)
+        values(#{id},#{loadnum},#{unloadnum},#{localDate})
+    </insert>
+</mapper>

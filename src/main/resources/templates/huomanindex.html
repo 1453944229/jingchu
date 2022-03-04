@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>运满满货运平台官网-物流配货,货主,司机找货发货,货源查询,专线查询</title>
+  <meta name="keywords" content="货车找货,有车找货源,找车发货,发物流,物流配货">
+  <meta name="description" content="运满满为货车司机提供拉货找货，为货主提供找车发货的高效物流服务。司机可根据车型智能匹配货源，快速找货，还可在线交易卖车、买车，享受优惠加油、免费办理ETC等业务；货主可就近快速找车发货、查专线、找货源、购买货运保险。高效找货、发货就用运满满！">
+  <link rel="shortcut icon" href="https://static.ymm56.com/offical-website/static/images/favicon.ico">    <link rel="stylesheet" href="https://static.ymm56.com/offical-website/static/css/common.css?v=8">
+  <link rel="stylesheet" href="https://static.ymm56.com/offical-website/static/css/product-phone.css?v=8">
+  <link rel="stylesheet" href="https://static.ymm56.com/offical-website/static/css/swiper-3.4.2.min.css?v=8">
+  <link rel="stylesheet" href="https://static.ymm56.com/offical-website/static/css/index.css?v=8">
+  <style>
+    .yun-chainese::after {
+      content: '';
+      display: inline-block;
+      height: 0.75rem;
+      border: 1px solid #ffffff;
+      margin-left: 0.7rem;
+      margin-right: .5rem;
+      margin-bottom: -0.125rem;
+    }
+    .container .news-center .news-block-list .block .image .tag span{
+      width: 3rem;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+<div class="container">
+  <div class="nav">
+    <div class="logo">
+      <a href="index.html" > <img src="https://static.ymm56.com/offical-website/static/picture/logo.png?v=8" alt="运满满官网logo"/></a>
+    </div>
+    <img src="https://static.ymm56.com/offical-website/static/picture/icon_menu.png" class="icon_menu" alt="">
+    <ul>
+      <li>
+        <a   class="selected"  href="index.html" ><span>首页</span></a>
+      </li>
+      <li>
+        <a  href="javascript:void(0)" id='driver_btn' rel="nofollw" ><span>司机加入</span></a>
+      </li>
+      <li>
+        <a  href="javascript:void(0)" id='shiper_btn' rel="nofollw" ><span>货主加入</span></a>
+      </li>
+      <li><a  >
+        <span class="icon">更多产品</span></a>
+        <div class="second-nav product">
+          <div class="inside-box">
+            <a href="http://www.ymm56.com/zhaoche/" rel="nofollw" >货找货车</a>
+            <a href="http://www.ymm56.com/peihuo/" rel="nofollw" >货车找货</a>
+            <a href="data.html" rel="nofollw" >数据产品</a>
+            <a href="post.html" rel="nofollw" >数字化驿站</a>
+            <a href="myb.html" rel="nofollw" >满运宝</a>
+            <a href="clw.html" rel="nofollw" >车联网</a>
+            <a href="product_define_car.html" rel="nofollw" >定义车</a>
+          </div>
+        </div>
+      </li>
+      <li><a  href="about.html" rel="nofollw" ><span>关于我们</span></a>
+      </li>
+      <li><a href="http://ymm56.zhiye.com/" rel="nofollw" ><span>人才招聘</span></a></li>
+      <li class="down">
+          <span class="download_btn">
+            APP下载
+            <div class="down_panel">
+               <div class="app">
+                  <div id="header_driver_qrcode" class="qrcode"></div>
+                  <div>司机端下载</div>
+               </div>
+               <div class="app">
+                  <div id="header_shipper_qrcode" class="qrcode"></div>
+                  <div>货主端下载</div>
+               </div>
+            </div>
+          </span>
+      </li>
+    </ul>
+
+    <script>
+      function showZhaopin() {
+        document.getElementsByClassName("zhaopin")[0].style.height = "auto";
+        document.getElementsByClassName("zhaopin")[0].style.borderTop = "1px solid #FB851D";
+      }
+
+      function hideZhaopin() {
+        document.getElementsByClassName("zhaopin")[0].style.height = "0";
+        document.getElementsByClassName("zhaopin")[0].style.borderTop = "none";
+      }
+      //js判断是否移动端
+      function isMobile(){
+        return /Android|iPhone|iPad|iPod|BlackBerry|webOS|WindowsPhone|SymbianOS|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      }
+      document.getElementById('shiper_btn').onclick = function (e) {
+        let url = generateUrl("https://static.ymm56.com/ymm-outdoor/pc-register?role=SHIPPER", 'SEO-nav-top')
+        if (isMobile()) {
+          url = generateUrl("https://huodong.ymm56.com/tview/F4BE86CAf6", 'SEO-nav-top')
+        }
+        openNewPage(url)
+      }
+      document.getElementById('driver_btn').onclick = function (e) {
+        let url = generateUrl("http://static.ymm56.com/ymm-outdoor/pc-register?role=DRIVER", 'SEO-nav-top')
+        if (isMobile()) {
+          url = generateUrl("https://huodong.ymm56.com/tview/b6092a8377", 'SEO-nav-top')
+        }
+//            window.location.href = url
+        openNewPage(url)
+      }
+    </script>
+  </div>    <div class="banner">
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <a target="_blank" href="javascript:;" onclick="return false;">
+          <img src=https://imagecdn.ymm56.com/ymmfile/oa-biz/cb90be25-8a29-4b8e-bc09-4095e51e4d74.jpg>
+          <div class="index qrcode_outer">
+            <div class="driver">
+              <!--<div id="index_driver_qrcode"></div>
+              <div>司机端下载</div>-->
+              <img style="display: block;width: 193px;height: 193px;" src="https://static.ymm56.com/offical-website/static/picture/miniapp.jpg">
+              <div>扫码发货</div>
+            </div>
+            <div class="shipper">
+              <div id="index_shipper_qrcode"></div>
+              <div>货主端下载</div>
+            </div>
+          </div>
+          <a href="http://www.ymm56.com/peihuo/" target="_blank" class="product-list-button" title="货车找货">
+            <img src="https://static.ymm56.com/offical-website/static/picture/product_list_button.png"  alt="">
+          </a>
+        </a>
+      </div>
+    </div> <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div> <a href="javascript:;"></a> <!-- 如果需要导航按钮 -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+
+
+  <div class="source-goods">
+    <label for="cargoradioA">货源信息</label>
+    <label for="radioB">车源信息</label>
+    <div>
+      <input type="radio" class="switch_radio" id="cargoradioA" name="radio1" checked />
+      <label for="cargoradioA">货源信息</label>
+      <div class="content">
+        <div class="item">
+          <div class="path">
+            <a href="http://www.ymm56.com/peihuo/goods-30653169732063/" target='_blank'>
+              廊坊市 —— 包头市
+            </a>
+          </div>
+          <div class="line">
+            <span class="label">车长： </span> <span class="value">7.7米</span>
+            <span class="label">车型： </span> <span class="value">高栏,高低板</span>
+          </div>
+          <div class="line">
+            <span class="label">货物名称： </span> <span class="value">铁粉</span>
+            <span class="label">重量： </span> <span class="value">195~195吨</span>
+          </div>
+          <div class="line">
+            <span class="label">几装几卸： </span> <span class="value">一装两卸</span>
+          </div>
+          <div class="line">
+            <span class="label">装货时间：</span> <span class="value">2021-12-03</span>
+          </div>
+          <a href="http://www.ymm56.com/peihuo/goods-30653169732063/" target='_blank' class="button" rel="nofollow">
+            查看详情
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <div>
+      <input type="radio" class="switch_radio" id="radioB" name="radio1" />
+      <label for="radioB">车源信息</label>
+      <div class="content">
+        <div class="item">
+          <div class="path">
+            <a href="http://www.ymm56.com/zhaoche/driver-952990349979524096/" target='_blank'>
+              衡阳市 —— 岳阳市
+            </a>
+          </div>
+          <div class="line">
+            <span class="label">车型要求:</span> <span class="value">面包车</span>
+            <span class="label">用车类型：</span> <span class="value">零担配货</span>
+          </div>
+          <div class="line">
+            <span class="label">车长要求: </span> <span class="value">2.7米</span>
+            <span class="label">货物重量： </span> <span class="value">6吨</span>
+          </div>
+          <div class="line">
+            <span class="label">车辆要求: </span> <span class="value"></span>
+          </div>
+          <div class="line">
+            <span class="label">装货日期：</span> <span class="value">2021-12-03</span>
+          </div>
+          <a href="http://www.ymm56.com/zhaoche/driver-952990349979524096/" target='_blank' class="button">
+            查看详情
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="qr-code-window">
+    <div class="inside"> <img src="https://static.ymm56.com/offical-website/static/picture/wechat.jpeg"> </div>
+    <span>&times;</span>
+  </div>
+  <script src="https://static.ymm56.com/offical-website/static/js/jquery-3.2.1.min.js?v=8"></script>
+  <script src="https://static.ymm56.com/offical-website/static/js/swiper-3.4.2.jquery.min.js?v=8"></script>
+  <script src="https://static.ymm56.com/offical-website/static/js/common.js?v=8"></script>
+  <script src="https://static.ymm56.com/offical-website/static/js/pagination.min.js?v=8"></script>
+  <script src="//static.ymm56.com/lib-track/0.3.5/index.js"></script>
+  <script src="https://static.ymm56.com/offical-website/static/js/track.js?v=8"></script>
+  <script src="https://static.ymm56.com/offical-website/static/js/qrcode.min.js?v=8"></script>
+  <script src="https://static.ymm56.com/offical-website/static/js/qrcode.js?v=8"></script>
+  <script>
+    function isMobile(){
+      return /Android|iPhone|iPad|iPod|BlackBerry|webOS|WindowsPhone|SymbianOS|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+    document.getElementById('cargo_owner_button').onclick = function (e) {
+      let url = generateUrl("https://static.ymm56.com/ymm-outdoor/pc-register?role=SHIPPER", 'SEO-nav-footer')
+      if (isMobile()) {
+        url = generateUrl("https://huodong.ymm56.com/tview/F4BE86CAf6", 'SEO-nav-footer')
+      }
+      openNewPage(url)
+    }
+    document.getElementById('driver_button').onclick = function (e) {
+      let url = generateUrl("http://static.ymm56.com/ymm-outdoor/pc-register?role=DRIVER", 'SEO-nav-footer')
+      if (isMobile()) {
+        url = generateUrl("https://huodong.ymm56.com/tview/b6092a8377", 'SEO-nav-footer')
+      }
+      //window.location.href = url
+      openNewPage(url)
+    }
+  </script>        <script>
+  var mySwiper = new Swiper('.swiper-container', {
+    autoplay: 5000, //可选选项，自动滑动
+    loop: document.querySelectorAll('.swiper-slide').length > 1,
+    paginationClickable: true,
+    pagination: '.swiper-pagination',
+    nextButton: '.swiper-button-next',
+    prevButton: '.swiper-button-prev',
+  });
+  document.getElementById('download_driver').onclick = function () {
+    openNewPage(generateUrl('https://static.ymm56.com/shareDown/?approle=driver', 'seo-wap-nav'))
+  }
+  document.getElementById('download_shipper').onclick = function () {
+    openNewPage(generateUrl('https://static.ymm56.com/shareDown/?approle=shipper', 'seo-wap-nav'))
+  }
+</script>
+</body>
+
+</html>
